@@ -53,17 +53,30 @@
 <div class="outerwrapper">
 	<div class="chart"></div>
 
-	<ul>
+	<ul id="networkSelect">
 		<li>
-			<label for="justify-content">Social network</label>
-			<select name="select" id="social-network">
-				<option value="Twitter">Twitter</option>
-				<option value="Facebook">Facebook</option>
-				<option value="Academia.edu">Academia.edu</option>
-				<option value="ResearchGate">ResearchGate</option>
-				<option value="LinkedIn">LinkedIn</option>
-				<option value="Mendeley">Mendeley</option>
-			</select>
+			<input type="checkbox" id="twitter" name="twitter" checked>
+			<label for="twitter">Twitter</label>
+		</li>
+		<li>
+			<input type="checkbox" id="facebook" name="facebook" checked>
+			<label for="facebook">Facebook</label>
+		</li>
+		<li>
+			<input type="checkbox" id="academiaedu" name="academiaedu" checked>
+			<label for="academiaedu">Academia.edu</label>
+		</li>
+		<li>
+			<input type="checkbox" id="researchGate" name="researchGate" checked>
+			<label for="researchGate">ResearchGate</label>
+		</li>
+		<li>
+			<input type="checkbox" id="linkedIn" name="linkedIn" checked>
+			<label for="linkedIn">linkedIn</label>
+		</li>
+		<li>
+			<input type="checkbox" id="mendeley" name="mendeley" checked>
+			<label for="mendeley">Mendeley</label>
 		</li>
 	<ul>
 </div>
@@ -88,7 +101,7 @@ function buildGraphic(dataSet) {
 	var baseRad = (Math.PI * 2) / dataSet[0].length;
 	var baseAngle = 180 / dataSet[0].length;
 
-	var chooseNetwork = jQuery('#social-network');
+	var networkSelect = jQuery('#networkSelect');
 
 	var scaleLines = [0, 5,10,15,20,25,30,35];
 
@@ -141,7 +154,7 @@ function buildGraphic(dataSet) {
 		myArc.endAngle(function (d,i) { return baseRad * (i + 1) });
 
 
-	var arcs1 = myGroup.selectAll('.arcs')  
+	var arcs1 = myGroup.selectAll('.arc1')  
 	  .data(dataSet[0])
 		.enter();
 
@@ -152,18 +165,19 @@ function buildGraphic(dataSet) {
 		.attr('stroke-width', '1')
 		.attr('opacity','0.5');
 
-	var arcs2 = myGroup.selectAll('.arcs')  
+	var arcs2 = myGroup.selectAll('.arc2')  
 	  .data(dataSet[1])
 		.enter();
 
 	arcs2.append("path")
 		.attr('d', myArc)
+		.attr('class', 'arc2')
 		.attr('fill', colour[1])
 		.attr('stroke', '#fff')
 		.attr('stroke-width', '1')
 		.attr('opacity','0.5');
 
-	var arcs3 = myGroup.selectAll('.arcs')  
+	var arcs3 = myGroup.selectAll('.arc3')  
 	  .data(dataSet[2])
 		.enter();
 
@@ -174,7 +188,7 @@ function buildGraphic(dataSet) {
 		.attr('stroke-width', '1')
 		.attr('opacity','0.5');
 
-	var arcs4 = myGroup.selectAll('.arcs')  
+	var arcs4 = myGroup.selectAll('.arc4')  
 	  .data(dataSet[3])
 		.enter();
 
@@ -185,7 +199,7 @@ function buildGraphic(dataSet) {
 		.attr('stroke-width', '1')
 		.attr('opacity','0.5');
 
-	var arcs5 = myGroup.selectAll('.arcs')  
+	var arcs5 = myGroup.selectAll('.arc5')  
 	  .data(dataSet[4])
 		.enter();
 
@@ -196,7 +210,7 @@ function buildGraphic(dataSet) {
 		.attr('stroke-width', '1')
 		.attr('opacity','0.5');
 
-	var arcs6 = myGroup.selectAll('.arcs')  
+	var arcs6 = myGroup.selectAll('.arc6')  
 	  .data(dataSet[5])
 		.enter();
 
@@ -207,28 +221,48 @@ function buildGraphic(dataSet) {
 		.attr('stroke-width', '1')
 		.attr('opacity','0.5');
 
+	jQuery('#twitter').change(
+		function () {
+			if($(this).attr('checked')) {
+				console.log("It's checked");
+				myGroup.selectAll('path.arc2')
+					.transition()
+					.duration(200)
+					.attr('opacity', '0.5');
+			} else {
+				console.log("It ain't checked");
+				myGroup.selectAll('path.arc2')
+					.transition()
+					.duration(200)
+					.attr('opacity', '0');
+			}
+			;
+		}
+	);
 
-	chooseNetwork.change(function() {
-		var selection = jQuery(this)[0].selectedIndex;  
-
-		mySvg.selectAll('path')
-			.data(dataSet[selection])
-			.transition()
-			.duration(200)
-			.attr('d', myArc);
-	});
-
-	// arcs.append("svg:text")
-	// 	.attr("transform", function(d,i) { 
-
-	// 		var opposite = Math.tan(baseRad * 0) * d;
-
-			
-	// 		return "translate(" + opposite + "," + -d + ")"; })
-	// 	.attr("dy", ".35em")
-	// 	.attr("text-anchor", "start")
-	// 	.text("hello Mum!");
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function buildArrays () {
 
 	d3.csv("data/full-survey-spreadsheet.csv", function(data) {
