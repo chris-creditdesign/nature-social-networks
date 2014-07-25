@@ -37,7 +37,7 @@ module.exports = function(grunt){
 		uglify: {
 			build: {
 				files: {
-					'assets/js/index.min.js': ['assets/js/index.js']
+					'assets/js/index.min.js': ['assets/js/buildGraphic.js','assets/js/index.js']
 				}
 			}
 		},
@@ -52,6 +52,8 @@ module.exports = function(grunt){
 						'assets/widget.html',
 						'assets/concat/script-open.txt',
 						'assets/js/buildGraphic.js',
+						'assets/js/buildArrays.js',
+						'assets/js/buildObjects.js',
 						'assets/js/index.js',
 						'assets/concat/script-close.txt',
 						'assets/polopoly-footer.html'
@@ -65,7 +67,9 @@ module.exports = function(grunt){
 						'assets/concat/style-close.txt',
 						'assets/widget.html',
 						'assets/concat/script-open.txt',
-						'assets/js/index.min.js',
+						// 'assets/js/index.min.js',
+						'assets/js/buildGraphic.js',
+						'assets/js/index.js',
 						'assets/concat/script-close.txt',
 						],
 				dest: 'dist/index.html'
@@ -73,14 +77,17 @@ module.exports = function(grunt){
 		},
 
 		browser_sync: {
-			files: {
-				src: [
-					'build/index.html',
-					]
-			},
-			options: {
-				watchTask: true
-			}
+
+            files: {
+                src : 'build/index.html'
+            },
+            options: {
+				watchTask: true,
+		        server: {
+		            baseDir: "/build/"
+		        }
+            }
+
 		},
 
 		watch: {
@@ -89,18 +96,18 @@ module.exports = function(grunt){
 		        tasks: ['buildcss','concat']
 		    },
 			// uglify: {
-			// 	files: ['assets/js/index.js'],
+			// 	files: ['assets/js/*.js'],
 			// 	tasks: ['uglify','concat']
 			// },
 			concat: {
-				files: ['assets/*'],
+				files: ['assets/*','assets/js/*.js'],
 				tasks: ['concat']
 			}
 		}
 
     });
 
-    grunt.registerTask('default', ['browser_sync','watch']);
+    grunt.registerTask('default', ['watch']);
     // use build css for the final dist css
     grunt.registerTask('buildcss',  ['sass', 'cssc', 'cssmin']);
 
