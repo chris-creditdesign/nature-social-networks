@@ -419,24 +419,24 @@ function buildArrays () {
 			'<table>\n' +
 
 			'<thead>' +
-			'<tr><th>site</th>' +
-			'<th>notProfessionally</th>' +
-			'<th>curiosity</th>' +
-			'<th>contact</th>' +
-			'<th>postContent</th>' +
-			'<th>discussingResearch</th>' +
-			'<th>discussingIssues</th>' +
-			'<th>commenting</th>' +
-			'<th>job</th>' +
+			'<tr><th>Site</th>' +
+			'<th>Not professionally</th>' +
+			'<th>Curiosity</th>' +
+			'<th>Contact</th>' +
+			'<th>Post content</th>' +
+			'<th>Discussing research</th>' +
+			'<th>Discussing issues</th>' +
+			'<th>Commenting</th>' +
+			'<th>Job</th>' +
 			'<th>funding</th>' +
-			'<th>discoveringPeers</th>' +
-			'<th>contactingPeers</th>' +
-			'<th>discoveringIndividuals</th>' +
-			'<th>contactingIndividuals</th>' +
-			'<th>researchPapers</th>' +
-			'<th>links</th>' +
-			'<th>otherDiscussions</th>' +
-			'<th>metrics</th>' +
+			'<th>Discovering peers</th>' +
+			'<th>Contacting peers</th>' +
+			'<th>Discovering individuals</th>' +
+			'<th>Contacting individuals</th>' +
+			'<th>Research papers</th>' +
+			'<th>Links</th>' +
+			'<th>Other discussions</th>' +
+			'<th>Metrics</th>' +
 			'<th>Number of respondents</th></tr>' +
 			'</thead>\n' +
 			'<tbody>\n' +
@@ -478,7 +478,7 @@ function buildArrays () {
 			'<td>' + sitesTotals[1][15] + '</td>' + 
 			'<td>' + sitesTotals[1][16] + '</td>' + 
 			'<td>' + sitesTotals[1][17] + '</td></tr>\n' +
-			'<tr><td>Academia.edu</td>' +
+			'<tr><td>Academiaedu</td>' +
 			'<td>' + sitesTotals[3][0] + '</td>' + 
 			'<td>' + sitesTotals[3][1] + '</td>' + 
 			'<td>' + sitesTotals[3][2] + '</td>' + 
@@ -497,7 +497,7 @@ function buildArrays () {
 			'<td>' + sitesTotals[3][15] + '</td>' + 
 			'<td>' + sitesTotals[3][16] + '</td>' + 
 			'<td>' + sitesTotals[3][17] + '</td></tr>\n' +
-			'<tr><td>Research Gate</td>' +
+			'<tr><td>ResearchGate</td>' +
 			'<td>' + sitesTotals[4][0] + '</td>' + 
 			'<td>' + sitesTotals[4][1] + '</td>' + 
 			'<td>' + sitesTotals[4][2] + '</td>' + 
@@ -516,7 +516,7 @@ function buildArrays () {
 			'<td>' + sitesTotals[4][15] + '</td>' + 
 			'<td>' + sitesTotals[4][16] + '</td>' + 
 			'<td>' + sitesTotals[4][17] + '</td></tr>\n' +
-			'<tr><td>Linked In</td>' +
+			'<tr><td>LinkedIn</td>' +
 			'<td>' + sitesTotals[5][0] + '</td>' + 
 			'<td>' + sitesTotals[5][1] + '</td>' + 
 			'<td>' + sitesTotals[5][2] + '</td>' + 

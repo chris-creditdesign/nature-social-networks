@@ -58,6 +58,8 @@ $colour-5: #EB6B4B;
 	.chooseNetwork {
 		text-align: center;	
 		ul#networkSelect {
+				padding: 0 160px;
+
 				li {
 					display: inline;
 					margin: 0px 10px;
@@ -78,13 +80,13 @@ $colour-5: #EB6B4B;
 					float: left;
 					margin-left: -40px;  
 
-				& + label>span>svg {
-					fill: $colour-1;
-				}
-		        
-				&:checked + label>span>svg {
-					fill: $colour-2;
-				}
+					& + label>span>svg>polygon {
+						opacity: 0;
+					}
+
+					&:checked + label>span>svg>polygon {
+						opacity: 1;
+					}
 
 				} // input
 			}

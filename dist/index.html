@@ -1,50 +1,26 @@
 <style scoped>
-.status-message{border:1px solid #c00;background:#fac7c7;padding:10px}.outerwrapper{width:100%;min-height:900px;position:relative;border:1px solid #c8c7cf}.outerwrapper h2,.outerwrapper h3,.outerwrapper p{padding:10px 10px 0;margin:0}.outerwrapper .chooseNetwork{text-align:center}.outerwrapper .chooseNetwork ul#networkSelect li{display:inline;margin:0 10px}.outerwrapper .chooseNetwork ul#networkSelect span{position:relative;top:4px;height:20px;width:20px}.outerwrapper .chooseNetwork ul#networkSelect input{outline:0!important;opacity:0;filter:alpha(opacity=0);zoom:1;float:left;margin-left:-40px}.outerwrapper .chooseNetwork ul#networkSelect input+label>span>svg{fill:#1abc9c}.outerwrapper .chooseNetwork ul#networkSelect input:checked+label>span>svg{fill:#27ae60}.outerwrapper .chart svg text{font-size:.8em}
+.status-message{border:1px solid #c00;background:#fac7c7;padding:10px}.outerwrapper{width:100%;min-height:900px;position:relative;border:1px solid #c8c7cf}.outerwrapper h2,.outerwrapper h3,.outerwrapper p{padding:10px 10px 0;margin:0}.outerwrapper .chooseNetwork{text-align:center}.outerwrapper .chooseNetwork ul#networkSelect{padding:0 160px}.outerwrapper .chooseNetwork ul#networkSelect li{display:inline;margin:0 10px}.outerwrapper .chooseNetwork ul#networkSelect span{position:relative;top:4px;height:20px;width:20px}.outerwrapper .chooseNetwork ul#networkSelect input{outline:0!important;opacity:0;filter:alpha(opacity=0);zoom:1;float:left;margin-left:-40px}.outerwrapper .chooseNetwork ul#networkSelect input+label>span>svg>polygon{opacity:0}.outerwrapper .chooseNetwork ul#networkSelect input:checked+label>span>svg>polygon{opacity:1}.outerwrapper .chart svg text{font-size:.8em}
 </style>
 <div class="outerwrapper">
 	<div class="chart"></div>
 
-	<div class="chooseNetwork">
-		<ul id="networkSelect">
-<!-- 			<li>
-				<input type="checkbox" id="twitter" name="twitter" checked>
-				<label for="twitter">Twitter</label>
-			</li>
-			<li>
-				<input type="checkbox" id="facebook" name="facebook" checked>
-				<label for="facebook">Facebook</label>
-			</li>
-			<li>
-				<input type="checkbox" id="academiaedu" name="academiaedu" checked>
-				<label for="academiaedu">Academia.edu</label>
-			</li>
-			<li>
-				<input type="checkbox" id="researchGate" name="researchGate" checked>
-				<label for="researchGate">ResearchGate</label>
-			</li>
-			<li>
-				<input type="checkbox" id="linkedIn" name="linkedIn" checked>
-				<label for="linkedIn">linkedIn</label>
-			</li>
-			<li>
-				<input type="checkbox" id="mendeley" name="mendeley" checked>
-				<label for="mendeley">Mendeley</label>
-			</li> -->
-		</ul>
-	</div>
+	<div class="chooseNetwork"></div>
 </div>
 
 
 <!--[if gt IE 8]><!-->
 <script type="text/javascript">
 function buildCheckboxes (allSites, colour, lowOpacityLevel, strokeColour) {
-	/* Create checkboxes for each site */	  
-	d3.select("#networkSelect").selectAll('li')
+	/* Create checkboxes for each site */
+	d3.select(".chooseNetwork")
+		.append("ul")
+		.attr("id","networkSelect")
+		.selectAll('li')
 	  .data(allSites)
 	  	.enter()
 		.append("li")
 		.html(function (d, i) {
-			var innerHTML = "<input type='checkbox' id='" + d + "' name='" + d + "' checked><label for='" + d + "'><span><svg height='20' width='20'><circle cx='10' cy='10' r='10' fill='" + colour[i] + "' class='dot" + i + "' opacity='" + lowOpacityLevel + "'></circle><polygon fill='" + strokeColour + "' points='8.163,11.837 6.062,9.737 3.963,11.837 6.062,13.938 8.163,16.037 16.037,8.162 13.938,6.062'/></polygon></svg></span> " + d + "</label>";
+			var innerHTML = "<input type='checkbox' id='" + d + "' name='" + d + "' checked><label for='" + d + "'><span><svg height='20' width='20'><circle cx='10' cy='10' r='10' fill='" + colour[i] + "' class='dot" + i + "' opacity='" + lowOpacityLevel + "'></circle><polygon fill='#fff' points='8.163,11.837 6.062,9.737 3.963,11.837 6.062,13.938 8.163,16.037 16.037,8.162 13.938,6.062'/></polygon></svg></span> " + d + "</label>";
 
 			return innerHTML;
 		});
@@ -67,32 +43,32 @@ function fadeOutArcs (lowOpacityLevel) {
 
 	jQuery('#networkSelect').change(
 		function () {
-			if ($('#Twitter').attr('checked')) {
+			if (jQuery('#Twitter').is(':checked')) {
 				fadeOut('path.arc0');
 			} else {
 				fadeIn('path.arc0')
 			}
-			if ($('#Facebook').attr('checked')) {
+			if (jQuery('#Facebook').is(':checked')) {
 				fadeOut('path.arc1');
 			} else {
 				fadeIn('path.arc1')
 			}
-			if ($('#Academiaedu').attr('checked')) {
+			if (jQuery('#Academiaedu').is(':checked')) {
 				fadeOut('path.arc2');
 			} else {
 				fadeIn('path.arc2')
 			}
-			if ($('#ResearchGate').attr('checked')) {
+			if (jQuery('#ResearchGate').is(':checked')) {
 				fadeOut('path.arc3');
 			} else {
 				fadeIn('path.arc3')
 			}
-			if ($('#LinkedIn').attr('checked')) {
+			if (jQuery('#LinkedIn').is(':checked')) {
 				fadeOut('path.arc4');
 			} else {
 				fadeIn('path.arc4')
 			}
-			if ($('#Mendeley').attr('checked')) {
+			if (jQuery('#Mendeley').is(':checked')) {
 				fadeOut('path.arc5');
 			} else {
 				fadeIn('path.arc5')
@@ -210,28 +186,6 @@ function buildGraphic(dataSet, margin, width, height, radiusScale, lowOpacityLev
 		buildArcs(i);
 	};
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 (function() {
 		var init = function($)
 		{
@@ -242,7 +196,7 @@ function buildGraphic(dataSet, margin, width, height, radiusScale, lowOpacityLev
 
 		/*	Margin, Width and height */
 
-		var outerWrapperWidth = $('.outerwrapper').width();
+		var outerWrapperWidth = $('.section').width();
 
 		var margin = {top: 0, right: 100, bottom: 0, left: 100};
 		var width = outerWrapperWidth - margin.left - margin.right;
@@ -282,6 +236,7 @@ function buildGraphic(dataSet, margin, width, height, radiusScale, lowOpacityLev
 			/*	All of the D3/svg code is contained within the call back function */
 			/*	Loading D3 into ie6-8 seems to cause a runtime error */
 			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			// $.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 				// buildObjects(); 
 				
 				// buildArrays();

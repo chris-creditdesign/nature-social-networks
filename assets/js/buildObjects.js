@@ -669,23 +669,23 @@ function buildObjects () {
 
 			'<thead>' +
 			'<tr><th>site</th>' +
-			'<th>notProfessionally</th>' +
-			'<th>curiosity</th>' +
-			'<th>contact</th>' +
-			'<th>postContent</th>' +
-			'<th>discussingResearch</th>' +
-			'<th>discussingIssues</th>' +
-			'<th>commenting</th>' +
-			'<th>job</th>' +
-			'<th>funding</th>' +
-			'<th>discoveringPeers</th>' +
-			'<th>contactingPeers</th>' +
-			'<th>discoveringIndividuals</th>' +
-			'<th>contactingIndividuals</th>' +
-			'<th>researchPapers</th>' +
-			'<th>links</th>' +
-			'<th>otherDiscussions</th>' +
-			'<th>metrics</th></tr>' +
+			'<th>Sot professionally</th>' +
+			'<th>Curiosity</th>' +
+			'<th>Contact</th>' +
+			'<th>Post content</th>' +
+			'<th>Discussing research</th>' +
+			'<th>Discussing issues</th>' +
+			'<th>Commenting</th>' +
+			'<th>Job</th>' +
+			'<th>Funding</th>' +
+			'<th>Discovering peers</th>' +
+			'<th>Contacting peers</th>' +
+			'<th>Discovering individuals</th>' +
+			'<th>Contacting individuals</th>' +
+			'<th>Research papers</th>' +
+			'<th>Links</th>' +
+			'<th>Other discussions</th>' +
+			'<th>Metrics</th></tr>' +
 			'</thead>\n' +
 			'<tbody>\n' +
 			'<tr><td>Twitter</td>' +
@@ -742,7 +742,7 @@ function buildObjects () {
 			'<td>' + sites.selectedSites_3.links + '</td>' + 
 			'<td>' + sites.selectedSites_3.otherDiscussions + '</td>' + 
 			'<td>' + sites.selectedSites_3.metrics + '</td></tr>\n' +
-			'<tr><td>Academia.edu</td>' +
+			'<tr><td>Academiaedu</td>' +
 			'<td>' + sites.selectedSites_4.notProfessionally + '</td>' + 
 			'<td>' + sites.selectedSites_4.curiosity + '</td>' + 
 			'<td>' + sites.selectedSites_4.contact + '</td>' + 
@@ -760,7 +760,7 @@ function buildObjects () {
 			'<td>' + sites.selectedSites_4.links + '</td>' + 
 			'<td>' + sites.selectedSites_4.otherDiscussions + '</td>' + 
 			'<td>' + sites.selectedSites_4.metrics + '</td></tr>\n' +
-			'<tr><td>Research Gate</td>' +
+			'<tr><td>ResearchGate</td>' +
 			'<td>' + sites.selectedSites_5.notProfessionally + '</td>' + 
 			'<td>' + sites.selectedSites_5.curiosity + '</td>' + 
 			'<td>' + sites.selectedSites_5.contact + '</td>' + 
@@ -778,7 +778,7 @@ function buildObjects () {
 			'<td>' + sites.selectedSites_5.links + '</td>' + 
 			'<td>' + sites.selectedSites_5.otherDiscussions + '</td>' + 
 			'<td>' + sites.selectedSites_5.metrics + '</td></tr>\n' +
-			'<tr><td>Linked In</td>' +
+			'<tr><td>LinkedIn</td>' +
 			'<td>' + sites.selectedSites_6.notProfessionally + '</td>' + 
 			'<td>' + sites.selectedSites_6.curiosity + '</td>' + 
 			'<td>' + sites.selectedSites_6.contact + '</td>' + 
@@ -796,7 +796,7 @@ function buildObjects () {
 			'<td>' + sites.selectedSites_6.links + '</td>' + 
 			'<td>' + sites.selectedSites_6.otherDiscussions + '</td>' + 
 			'<td>' + sites.selectedSites_6.metrics + '</td></tr>\n' +
-			'<tr><td>Biomed Experts</td>' +
+			'<tr><td>BiomedExperts</td>' +
 			'<td>' + sites.selectedSites_7.notProfessionally + '</td>' + 
 			'<td>' + sites.selectedSites_7.curiosity + '</td>' + 
 			'<td>' + sites.selectedSites_7.contact + '</td>' + 
@@ -814,7 +814,7 @@ function buildObjects () {
 			'<td>' + sites.selectedSites_7.links + '</td>' + 
 			'<td>' + sites.selectedSites_7.otherDiscussions + '</td>' + 
 			'<td>' + sites.selectedSites_7.metrics + '</td></tr>\n' +
-			'<tr><td>Google +</td>' +
+			'<tr><td>Google+</td>' +
 			'<td>' + sites.selectedSites_8.notProfessionally + '</td>' + 
 			'<td>' + sites.selectedSites_8.curiosity + '</td>' + 
 			'<td>' + sites.selectedSites_8.contact + '</td>' + 

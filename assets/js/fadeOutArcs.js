@@ -16,32 +16,32 @@ function fadeOutArcs (lowOpacityLevel) {
 
 	jQuery('#networkSelect').change(
 		function () {
-			if ($('#Twitter').attr('checked')) {
+			if (jQuery('#Twitter').is(':checked')) {
 				fadeOut('path.arc0');
 			} else {
 				fadeIn('path.arc0')
 			}
-			if ($('#Facebook').attr('checked')) {
+			if (jQuery('#Facebook').is(':checked')) {
 				fadeOut('path.arc1');
 			} else {
 				fadeIn('path.arc1')
 			}
-			if ($('#Academiaedu').attr('checked')) {
+			if (jQuery('#Academiaedu').is(':checked')) {
 				fadeOut('path.arc2');
 			} else {
 				fadeIn('path.arc2')
 			}
-			if ($('#ResearchGate').attr('checked')) {
+			if (jQuery('#ResearchGate').is(':checked')) {
 				fadeOut('path.arc3');
 			} else {
 				fadeIn('path.arc3')
 			}
-			if ($('#LinkedIn').attr('checked')) {
+			if (jQuery('#LinkedIn').is(':checked')) {
 				fadeOut('path.arc4');
 			} else {
 				fadeIn('path.arc4')
 			}
-			if ($('#Mendeley').attr('checked')) {
+			if (jQuery('#Mendeley').is(':checked')) {
 				fadeOut('path.arc5');
 			} else {
 				fadeIn('path.arc5')

@@ -8,7 +8,7 @@
 
 		/*	Margin, Width and height */
 
-		var outerWrapperWidth = $('.outerwrapper').width();
+		var outerWrapperWidth = $('.section').width();
 
 		var margin = {top: 0, right: 100, bottom: 0, left: 100};
 		var width = outerWrapperWidth - margin.left - margin.right;
@@ -48,6 +48,7 @@
 			/*	All of the D3/svg code is contained within the call back function */
 			/*	Loading D3 into ie6-8 seems to cause a runtime error */
 			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			// $.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 				// buildObjects(); 
 				
 				// buildArrays();
