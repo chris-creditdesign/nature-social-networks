@@ -55,5 +55,51 @@ $colour-5: #EB6B4B;
 		margin: 0;
 	}
 
+	.chooseNetwork {
+		text-align: center;	
+		ul#networkSelect {
+				li {
+					display: inline;
+					margin: 0px 10px;
+				}
+
+				span {
+					position: relative;
+					top: 4px;
+					height: 20px;
+					width: 20px;
+				} // span
+
+				input {
+					outline: none !important;
+					opacity: 0;
+					filter: alpha(opacity=0);
+					zoom: 1;
+					float: left;
+					margin-left: -40px;  
+
+				& + label>span>svg {
+					fill: $colour-1;
+				}
+		        
+				&:checked + label>span>svg {
+					fill: $colour-2;
+				}
+
+				} // input
+			}
+	}
+
+	.chart {
+		svg {
+			line {
+				// shape-rendering: crispEdges;
+			}
+			text {
+				font-size: 0.8em;
+			}
+		}
+	}
+
 } // outerwrapper
 

@@ -37,7 +37,16 @@ module.exports = function(grunt){
 		uglify: {
 			build: {
 				files: {
-					'assets/js/index.min.js': ['assets/js/buildGraphic.js','assets/js/index.js']
+					'assets/js/index.min.js': [	
+												'assets/js/buildCheckboxes.js',	
+												'assets/js/fadeOutArcs.js',	
+												'assets/js/buildSVG.js',
+												'assets/js/buildTicks.js',
+												'assets/js/buildLabels.js',
+												'assets/js/buildLines.js',
+												'assets/js/buildScales.js',
+												'assets/js/buildGraphic.js',
+												'assets/js/index.js']
 				}
 			}
 		},
@@ -51,6 +60,13 @@ module.exports = function(grunt){
 						'assets/concat/style-close.txt',
 						'assets/widget.html',
 						'assets/concat/script-open.txt',
+						'assets/js/buildCheckboxes.js',
+						'assets/js/fadeOutArcs.js',
+						'assets/js/buildSVG.js',
+						'assets/js/buildTicks.js',
+						'assets/js/buildLabels.js',
+						'assets/js/buildLines.js',
+						'assets/js/buildScales.js',
 						'assets/js/buildGraphic.js',
 						'assets/js/buildArrays.js',
 						'assets/js/buildObjects.js',
@@ -68,6 +84,13 @@ module.exports = function(grunt){
 						'assets/widget.html',
 						'assets/concat/script-open.txt',
 						// 'assets/js/index.min.js',
+						'assets/js/buildCheckboxes.js',
+						'assets/js/fadeOutArcs.js',
+						'assets/js/buildSVG.js',
+						'assets/js/buildTicks.js',
+						'assets/js/buildLabels.js',
+						'assets/js/buildLines.js',
+						'assets/js/buildScales.js',
 						'assets/js/buildGraphic.js',
 						'assets/js/index.js',
 						'assets/concat/script-close.txt',

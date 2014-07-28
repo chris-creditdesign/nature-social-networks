@@ -1,85 +1,113 @@
 <style scoped>
-.outerwrapper{width:100%;min-height:900px;position:relative;border:1px solid #c8c7cf}.outerwrapper h2,.outerwrapper h3,.outerwrapper p{padding:10px 10px 0;margin:0}
+.status-message{border:1px solid #c00;background:#fac7c7;padding:10px}.outerwrapper{width:100%;min-height:900px;position:relative;border:1px solid #c8c7cf}.outerwrapper h2,.outerwrapper h3,.outerwrapper p{padding:10px 10px 0;margin:0}.outerwrapper .chooseNetwork{text-align:center}.outerwrapper .chooseNetwork ul#networkSelect li{display:inline;margin:0 10px}.outerwrapper .chooseNetwork ul#networkSelect span{position:relative;top:4px;height:20px;width:20px}.outerwrapper .chooseNetwork ul#networkSelect input{outline:0!important;opacity:0;filter:alpha(opacity=0);zoom:1;float:left;margin-left:-40px}.outerwrapper .chooseNetwork ul#networkSelect input+label>span>svg{fill:#1abc9c}.outerwrapper .chooseNetwork ul#networkSelect input:checked+label>span>svg{fill:#27ae60}.outerwrapper .chart svg text{font-size:.8em}
 </style>
 <div class="outerwrapper">
 	<div class="chart"></div>
 
-	<ul id="networkSelect">
-		<li>
-			<input type="checkbox" id="twitter" name="twitter" checked>
-			<label for="twitter">Twitter</label>
-		</li>
-		<li>
-			<input type="checkbox" id="facebook" name="facebook" checked>
-			<label for="facebook">Facebook</label>
-		</li>
-		<li>
-			<input type="checkbox" id="academiaedu" name="academiaedu" checked>
-			<label for="academiaedu">Academia.edu</label>
-		</li>
-		<li>
-			<input type="checkbox" id="researchGate" name="researchGate" checked>
-			<label for="researchGate">ResearchGate</label>
-		</li>
-		<li>
-			<input type="checkbox" id="linkedIn" name="linkedIn" checked>
-			<label for="linkedIn">linkedIn</label>
-		</li>
-		<li>
-			<input type="checkbox" id="mendeley" name="mendeley" checked>
-			<label for="mendeley">Mendeley</label>
-		</li>
-	<ul>
+	<div class="chooseNetwork">
+		<ul id="networkSelect">
+<!-- 			<li>
+				<input type="checkbox" id="twitter" name="twitter" checked>
+				<label for="twitter">Twitter</label>
+			</li>
+			<li>
+				<input type="checkbox" id="facebook" name="facebook" checked>
+				<label for="facebook">Facebook</label>
+			</li>
+			<li>
+				<input type="checkbox" id="academiaedu" name="academiaedu" checked>
+				<label for="academiaedu">Academia.edu</label>
+			</li>
+			<li>
+				<input type="checkbox" id="researchGate" name="researchGate" checked>
+				<label for="researchGate">ResearchGate</label>
+			</li>
+			<li>
+				<input type="checkbox" id="linkedIn" name="linkedIn" checked>
+				<label for="linkedIn">linkedIn</label>
+			</li>
+			<li>
+				<input type="checkbox" id="mendeley" name="mendeley" checked>
+				<label for="mendeley">Mendeley</label>
+			</li> -->
+		</ul>
+	</div>
 </div>
 
 
 <!--[if gt IE 8]><!-->
 <script type="text/javascript">
-function buildGraphic(dataSet) {
-	/*  Colours for the bars */
-	var colour = [
-					"#00642D",
-					"#95177E",
-					"#F8B436",
-					"#EB6B4B",
-					"#3BAADC",
-					"#96BE17"
-				];
+function buildCheckboxes (allSites, colour, lowOpacityLevel, strokeColour) {
+	/* Create checkboxes for each site */	  
+	d3.select("#networkSelect").selectAll('li')
+	  .data(allSites)
+	  	.enter()
+		.append("li")
+		.html(function (d, i) {
+			var innerHTML = "<input type='checkbox' id='" + d + "' name='" + d + "' checked><label for='" + d + "'><span><svg height='20' width='20'><circle cx='10' cy='10' r='10' fill='" + colour[i] + "' class='dot" + i + "' opacity='" + lowOpacityLevel + "'></circle><polygon fill='" + strokeColour + "' points='8.163,11.837 6.062,9.737 3.963,11.837 6.062,13.938 8.163,16.037 16.037,8.162 13.938,6.062'/></polygon></svg></span> " + d + "</label>";
 
-	var margin = {top: 20, right: 50, bottom: 20, left: 80};
-	var width = 630 - margin.left - margin.right;
-	var height = 630 - margin.top - margin.bottom;
-	var baseRad = (Math.PI * 2) / dataSet[0].length;
-	var baseAngle = 180 / dataSet[0].length;
+			return innerHTML;
+		});
+}
+function fadeOutArcs (lowOpacityLevel) {
+	// body...
+	function fadeOut (x) {
+		d3.select(".chart").select("svg").selectAll(x)
+			.transition()
+			.duration(200)
+			.attr('opacity', lowOpacityLevel);
+	}
 
-	var networkSelect = jQuery('#networkSelect');
+	function fadeIn (x) {
+		d3.select(".chart").select("svg").selectAll(x)
+			.transition()
+			.duration(200)
+			.attr('opacity', '0');
+	}
 
-	var scaleLines = [0, 5,10,15,20,25,30,35];
+	jQuery('#networkSelect').change(
+		function () {
+			if ($('#Twitter').attr('checked')) {
+				fadeOut('path.arc0');
+			} else {
+				fadeIn('path.arc0')
+			}
+			if ($('#Facebook').attr('checked')) {
+				fadeOut('path.arc1');
+			} else {
+				fadeIn('path.arc1')
+			}
+			if ($('#Academiaedu').attr('checked')) {
+				fadeOut('path.arc2');
+			} else {
+				fadeIn('path.arc2')
+			}
+			if ($('#ResearchGate').attr('checked')) {
+				fadeOut('path.arc3');
+			} else {
+				fadeIn('path.arc3')
+			}
+			if ($('#LinkedIn').attr('checked')) {
+				fadeOut('path.arc4');
+			} else {
+				fadeIn('path.arc4')
+			}
+			if ($('#Mendeley').attr('checked')) {
+				fadeOut('path.arc5');
+			} else {
+				fadeIn('path.arc5')
+			}
+		}
+	);
+}
 
-	var radiusScale = d3.scale.linear()
-						.domain([0,35])
-						.range([0,width/2]);
-
-	var mySvg = d3.select(".chart").append("svg")
+function buildSVG(margin, width, height) {
+	d3.select(".chart").append("svg")
 		.attr("width", width + margin.left + margin.right)
 		.attr("height", height + margin.top + margin.bottom);
-
-	var myScale = mySvg.append("g")
-		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + ")");
-
-	myScale.selectAll('circle')
-	  .data(scaleLines)
-	  	.enter()
-	  	.append('circle')
-		.attr('cx', 0)
-		.attr('cy', 0)
-		.attr('r', function (d) {
-			return radiusScale(d);
-		})
-		.attr('fill', 'none')
-		.attr('stroke', '#666');
-
-	var myTicks = mySvg.append("g")
+}
+function buildTicks (margin, width, height, radiusScale, scaleLines) {
+	var myTicks = d3.select(".chart").select("svg").append("g")
 		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + ")");
 
 	myTicks.selectAll('text')
@@ -92,12 +120,70 @@ function buildGraphic(dataSet) {
 		.text(function (d) {
 			return d + "%";
 		});
+}
+function buildLabels (margin, width, height, radiusScale, scaleLines, questions, baseRad) {
+	var myLabels = d3.select(".chart").select("svg").append("g")
+		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + ")");
 
-	var myGroup = mySvg.append("g")
+	myLabels.selectAll('text')
+		.data(questions)
+		.enter()
+		.append('svg:text')
+		.attr('class','questions')
+		.attr('x', function (d,i) {
+			var xPos = radiusScale(d3.max(scaleLines)*1.1) * Math.cos((baseRad*i) - (baseRad*4.25));
+			return xPos;
+		})
+		.attr('y', function (d,i) {
+			var yPos = radiusScale(d3.max(scaleLines)*1.1) * Math.sin((baseRad*i) - (baseRad*4.25));
+			return yPos;
+		})
+		.attr('text-anchor','middle')
+		.attr("dy", ".35em")
+		.text(function (d) {
+			return d;
+		});
+}
+function buildLines (margin, width, height, radiusScale, scaleLines, dataSetLength, strokeColour, baseAngle) {
+	var mylines = d3.select(".chart").select("svg").append("g")
+			.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + ")");
+
+	for (var i = 0; i < dataSetLength; i++) {
+		mylines.append('line')
+			.attr('x1', '0')
+			.attr('y1', '0')
+			.attr('x2', '0')
+			.attr('y2', -radiusScale(scaleLines[scaleLines.length-1]))
+			.attr('stroke', strokeColour)
+			.attr('stroke-width','1px')
+			.attr('fill','none')
+			.attr('transform','rotate(' +  (baseAngle + ((baseAngle*2) * i)) + ')');
+	};
+}
+function buildScales (margin, width, height, radiusScale, scaleLines, strokeColour) {
+	
+	var myScale = d3.select(".chart").select("svg").append("g")		
+		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + ")");
+
+	myScale.selectAll('circle')
+	  .data(scaleLines)
+	  	.enter()
+	  	.append('circle')
+		.attr('cx', 0)
+		.attr('cy', 0)
+		.attr('r', function (d) {
+			return radiusScale(d);
+		})
+		.attr('fill', 'none')
+		.attr('stroke', strokeColour);
+}
+function buildGraphic(dataSet, margin, width, height, radiusScale, lowOpacityLevel, colour, baseRad, baseAngle) {
+	
+	var networkSelect = jQuery('#networkSelect');
+
+	var myGroup = d3.select(".chart").select("svg").append("g")
 		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + "), rotate(" + (baseAngle * -1) +")");
 		
-	  
-
 	var myArc = d3.svg.arc();
 		myArc.innerRadius(0);
 		myArc.outerRadius(function (d) { return radiusScale(d) } );
@@ -105,92 +191,24 @@ function buildGraphic(dataSet) {
 		myArc.endAngle(function (d,i) { return baseRad * (i + 1) });
 
 
-	var arcs1 = myGroup.selectAll('.arc1')  
-	  .data(dataSet[0])
-		.enter();
+	function buildArcs (i) {
+		var thisClass = 'arc' + i;
+	
+		myGroup.selectAll('.' + thisClass)
+		  .data(dataSet[i])
+			.enter()
+		  .append("path")
+			.attr('d', myArc)
+			.attr('class', thisClass)
+			.attr('fill', colour[i])
+			.attr('stroke', 'none')
+			.attr('stroke-width', '1')
+			.attr('opacity',lowOpacityLevel);
+	}
 
-	arcs1.append("path")
-		.attr('d', myArc)
-		.attr('fill', colour[0])
-		.attr('stroke', '#fff')
-		.attr('stroke-width', '1')
-		.attr('opacity','0.5');
-
-	var arcs2 = myGroup.selectAll('.arc2')  
-	  .data(dataSet[1])
-		.enter();
-
-	arcs2.append("path")
-		.attr('d', myArc)
-		.attr('class', 'arc2')
-		.attr('fill', colour[1])
-		.attr('stroke', '#fff')
-		.attr('stroke-width', '1')
-		.attr('opacity','0.5');
-
-	var arcs3 = myGroup.selectAll('.arc3')  
-	  .data(dataSet[2])
-		.enter();
-
-	arcs3.append("path")
-		.attr('d', myArc)
-		.attr('fill', colour[2])
-		.attr('stroke', '#fff')
-		.attr('stroke-width', '1')
-		.attr('opacity','0.5');
-
-	var arcs4 = myGroup.selectAll('.arc4')  
-	  .data(dataSet[3])
-		.enter();
-
-	arcs4.append("path")
-		.attr('d', myArc)
-		.attr('fill', colour[3])
-		.attr('stroke', '#fff')
-		.attr('stroke-width', '1')
-		.attr('opacity','0.5');
-
-	var arcs5 = myGroup.selectAll('.arc5')  
-	  .data(dataSet[4])
-		.enter();
-
-	arcs5.append("path")
-		.attr('d', myArc)
-		.attr('fill', colour[4])
-		.attr('stroke', '#fff')
-		.attr('stroke-width', '1')
-		.attr('opacity','0.5');
-
-	var arcs6 = myGroup.selectAll('.arc6')  
-	  .data(dataSet[5])
-		.enter();
-
-	arcs6.append("path")
-		.attr('d', myArc)
-		.attr('fill', colour[5])
-		.attr('stroke', '#fff')
-		.attr('stroke-width', '1')
-		.attr('opacity','0.5');
-
-	jQuery('#twitter').change(
-		function () {
-			if($(this).attr('checked')) {
-				console.log("It's checked");
-				myGroup.selectAll('path.arc2')
-					.transition()
-					.duration(200)
-					.attr('opacity', '0.5');
-			} else {
-				console.log("It ain't checked");
-				myGroup.selectAll('path.arc2')
-					.transition()
-					.duration(200)
-					.attr('opacity', '0');
-			}
-			;
-		}
-	);
-
+	for (var i = 0; i < dataSet.length; i++) {
+		buildArcs(i);
+	};
 }
 
 
@@ -223,11 +241,38 @@ function buildGraphic(dataSet) {
 
 
 		/*	Margin, Width and height */
-		var margin = {top: 15, right: 20, bottom: 20, left: 90};
-		var width = $('.outerwrapper').width()  - margin.left - margin.right;
-		var height = 350 - margin.top - margin.bottom;
+
+		var outerWrapperWidth = $('.outerwrapper').width();
+
+		var margin = {top: 0, right: 100, bottom: 0, left: 100};
+		var width = outerWrapperWidth - margin.left - margin.right;
+		var height = (outerWrapperWidth*0.9) - margin.top - margin.bottom;
 		/*	Global variable to control the length of D3 transitons */
 		var duration = 450;
+
+		/*  Colours for the bars */
+		var colour = [
+						"#00642D",
+						"#95177E",
+						"#F8B436",
+						"#EB6B4B",
+						"#3BAADC",
+						"#96BE17"
+					];
+		var strokeColour = "#666";
+
+		var scaleLines = [5,10,15,20,25,30,35];	
+
+		var lowOpacityLevel = 0.7;
+
+		var dataSet = [];
+		var questions = [];
+		var allSites = [];
+
+		var tableRows;
+		var headerRows;
+		var baseRad;
+		var baseAngle;
 
 		/*	==================================================================================== */
 		/*	jQuery ready */
@@ -240,6 +285,11 @@ function buildGraphic(dataSet) {
 				// buildObjects(); 
 				
 				// buildArrays();
+		
+				/* Scale for pie radius */
+				var radiusScale = d3.scale.linear()
+									.domain([0,35])
+									.range([0,(width/2)]);
 
 
 				$.ajax({
@@ -248,10 +298,8 @@ function buildGraphic(dataSet) {
 					dataType: 'text',
 					success: function (data) {
 
-						var dataSet = [];
-
 						// Store each row of the table in a var
-						var tableRows = $(data).find("tbody tr");
+						tableRows = $(data).find("tbody tr");
 						
 						for (var i = 0; i < tableRows.length; i++) {
 							
@@ -260,8 +308,27 @@ function buildGraphic(dataSet) {
 							for (var p = 1; p < (tableRows.eq(i).find('td').length -1); p++) {
 								dataSet[i].push(tableRows.eq(i).find('td').eq(p).text());
 							};
+
+							allSites.push(tableRows.eq(i).find('td').eq(0).text())
 						};
-						buildGraphic(dataSet);
+
+						headerRows = $(data).find("thead tr").find('th');
+
+						for (var i = 1; i < headerRows.length -1; i++) {
+							questions.push(headerRows.eq(i).text());
+						};
+
+						baseRad = (Math.PI * 2) / dataSet[0].length;
+						baseAngle = 180 / dataSet[0].length;
+
+						buildSVG(margin, width, height);
+						buildGraphic(dataSet, margin, width, height, radiusScale, lowOpacityLevel, colour, baseRad, baseAngle);
+						buildScales(margin, width, height, radiusScale, scaleLines, strokeColour);
+						buildLines(margin, width, height, radiusScale, scaleLines, dataSet[0].length, strokeColour, baseAngle);
+						buildLabels(margin, width, height, radiusScale, scaleLines, questions, baseRad);
+						buildTicks(margin, width, height, radiusScale, scaleLines);
+						buildCheckboxes(allSites, colour, lowOpacityLevel, strokeColour);
+						fadeOutArcs(lowOpacityLevel);
 					}
 
 
