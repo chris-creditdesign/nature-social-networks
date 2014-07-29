@@ -2,6 +2,10 @@ function buildArrays () {
 
 	d3.csv("data/full-survey-spreadsheet.csv", function(data) {
 
+		function round (x) {
+			return 5*(Math.round(x/5));
+		}
+
 
 		var sites = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -24,10 +28,14 @@ function buildArrays () {
 			];
 
 		var sitesTotals = [];
+
+		var totalResponses = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 		
 		for (var i = 0; i < data.length; i++) {
 
 			if (data[i].selectedSites_1 === "1") {
+				if (data[i].q10_1_1 === "1" || data[i].q10_1_1 === "0") totalResponses[0]++;
+
 				if (data[i].q10_1_1 === "1") 	sites[0][0]++;
 				if (data[i].q10_2_1 === "1") 	sites[0][1]++;
 				if (data[i].q10_3_1 === "1") 	sites[0][2]++;
@@ -48,6 +56,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_2 === "1") {
+				if (data[i].q10_1_2 === "1" || data[i].q10_1_2 === "0") totalResponses[1]++;
+
 				if (data[i].q10_1_2 === "1") 	sites[1][0]++;
 				if (data[i].q10_2_2 === "1") 	sites[1][1]++;
 				if (data[i].q10_3_2 === "1") 	sites[1][2]++;
@@ -68,6 +78,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_3 === "1") {
+				if (data[i].q10_1_3 === "1" || data[i].q10_1_3 === "0") totalResponses[2]++;
+
 				if (data[i].q10_1_3 === "1") 	sites[2][0]++;
 				if (data[i].q10_2_3 === "1") 	sites[2][1]++;
 				if (data[i].q10_3_3 === "1") 	sites[2][2]++;
@@ -88,6 +100,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_4 === "1") {
+				if (data[i].q10_1_4 === "1" || data[i].q10_1_4 === "0") totalResponses[3]++;
+
 				if (data[i].q10_1_4 === "1") 	sites[3][0]++;
 				if (data[i].q10_2_4 === "1") 	sites[3][1]++;
 				if (data[i].q10_3_4 === "1") 	sites[3][2]++;
@@ -108,6 +122,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_5 === "1") {
+				if (data[i].q10_1_5 === "1" || data[i].q10_1_5 === "0") totalResponses[4]++;
+
 				if (data[i].q10_1_5 === "1") 	sites[4][0]++;
 				if (data[i].q10_2_5 === "1") 	sites[4][1]++;
 				if (data[i].q10_3_5 === "1") 	sites[4][2]++;
@@ -128,6 +144,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_6 === "1") {
+				if (data[i].q10_1_6 === "1" || data[i].q10_1_6 === "0") totalResponses[5]++;
+
 				if (data[i].q10_1_6 === "1") 	sites[5][0]++;
 				if (data[i].q10_2_6 === "1") 	sites[5][1]++;
 				if (data[i].q10_3_6 === "1") 	sites[5][2]++;
@@ -148,6 +166,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_7 === "1") {
+				if (data[i].q10_1_7 === "1" || data[i].q10_1_7 === "0") totalResponses[6]++;
+
 				if (data[i].q10_1_7 === "1") 	sites[6][0]++;
 				if (data[i].q10_2_7 === "1") 	sites[6][1]++;
 				if (data[i].q10_3_7 === "1") 	sites[6][2]++;
@@ -168,6 +188,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_8 === "1") {
+				if (data[i].q10_1_8 === "1" || data[i].q10_1_8 === "0") totalResponses[7]++;
+
 				if (data[i].q10_1_8 === "1") 	sites[7][0]++;
 				if (data[i].q10_2_8 === "1") 	sites[7][1]++;
 				if (data[i].q10_3_8 === "1") 	sites[7][2]++;
@@ -188,6 +210,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_9 === "1") {
+				if (data[i].q10_1_9 === "1" || data[i].q10_1_9 === "0") totalResponses[8]++;
+
 				if (data[i].q10_1_9 === "1") 	sites[8][0]++;
 				if (data[i].q10_2_9 === "1") 	sites[8][1]++;
 				if (data[i].q10_3_9 === "1") 	sites[8][2]++;
@@ -208,6 +232,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_10 === "1") {
+				if (data[i].q10_1_10 === "1" || data[i].q10_1_10 === "0") totalResponses[9]++;
+
 				if (data[i].q10_1_10 === "1") 	sites[9][0]++;
 				if (data[i].q10_2_10 === "1") 	sites[9][1]++;
 				if (data[i].q10_3_10 === "1") 	sites[9][2]++;
@@ -228,6 +254,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_11 === "1") {
+				if (data[i].q10_1_11 === "1" || data[i].q10_1_11 === "0") totalResponses[10]++;
+
 				if (data[i].q10_1_11 === "1") 	sites[10][0]++;
 				if (data[i].q10_2_11 === "1") 	sites[10][1]++;
 				if (data[i].q10_3_11 === "1") 	sites[10][2]++;
@@ -248,6 +276,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_12 === "1") {
+				if (data[i].q10_1_12 === "1" || data[i].q10_1_12 === "0") totalResponses[11]++;
+
 				if (data[i].q10_1_12 === "1") 	sites[11][0]++;
 				if (data[i].q10_2_12 === "1") 	sites[11][1]++;
 				if (data[i].q10_3_12 === "1") 	sites[11][2]++;
@@ -268,6 +298,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_13 === "1") {
+				if (data[i].q10_1_13 === "1" || data[i].q10_1_13 === "0") totalResponses[12]++;
+
 				if (data[i].q10_1_13 === "1") 	sites[12][0]++;
 				if (data[i].q10_2_13 === "1") 	sites[12][1]++;
 				if (data[i].q10_3_13 === "1") 	sites[12][2]++;
@@ -288,6 +320,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_14 === "1") {
+				if (data[i].q10_1_14 === "1" || data[i].q10_1_14 === "0") totalResponses[13]++;
+
 				if (data[i].q10_1_14 === "1") 	sites[13][0]++;
 				if (data[i].q10_2_14 === "1") 	sites[13][1]++;
 				if (data[i].q10_3_14 === "1") 	sites[13][2]++;
@@ -308,6 +342,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_15 === "1") {
+				if (data[i].q10_1_15 === "1" || data[i].q10_1_15 === "0") totalResponses[14]++;
+
 				if (data[i].q10_1_15 === "1") 	sites[14][0]++;
 				if (data[i].q10_2_15 === "1") 	sites[14][1]++;
 				if (data[i].q10_3_15 === "1") 	sites[14][2]++;
@@ -328,6 +364,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_16 === "1") {
+				if (data[i].q10_1_16 === "1" || data[i].q10_1_16 === "0") totalResponses[15]++;
+
 				if (data[i].q10_1_16 === "1") 	sites[15][0]++;
 				if (data[i].q10_2_16 === "1") 	sites[15][1]++;
 				if (data[i].q10_3_16 === "1") 	sites[15][2]++;
@@ -348,6 +386,8 @@ function buildArrays () {
 			}
 
 			if (data[i].selectedSites_17 === "1") {
+				if (data[i].q10_1_17 === "1" || data[i].q10_1_17 === "0") totalResponses[16]++;
+
 				if (data[i].q10_1_17 === "1") 	sites[16][0]++;
 				if (data[i].q10_2_17 === "1") 	sites[16][1]++;
 				if (data[i].q10_3_17 === "1") 	sites[16][2]++;
@@ -369,52 +409,21 @@ function buildArrays () {
 
 		};
 		
-		// console.log(sites);
-
 		for (var i = 0; i < sites.length; i++) {
 			
-			var total = 0;
 			sitesTotals.push(new Array);
-			
-			$.each(sites[i],function() {
-				total += this;
-			});
 
 			for (var l = 0; l < sites[i].length; l++) {
-				var perCent = (sites[i][l] / total) * 100;
+				var perCent = (sites[i][l] / totalResponses[i]) * 100;
 				sitesTotals[i].push(perCent);
 			};
 
-			sitesTotals[i].push(total);
+			sitesTotals[i].push(totalResponses[i]);
 		};
 
-		// console.log(sitesTotals);
 
-
+		console.log(round(47.97843666));
 		
-		/*console.log(
-			'<tr><td>twitter</td><td>' + sites[0][0] + '</td>' + 
-			'<td>' + sites[0][1] + '</td>' + 
-			'<td>' + sites[0][2] + '</td>' + 
-			'<td>' + sites[0][3] + '</td>' + 
-			'<td>' + sites[0][4] + '</td>' + 
-			'<td>' + sites[0][5] + '</td>' + 
-			'<td>' + sites[0][6] + '</td>' + 
-			'<td>' + sites[0][7] + '</td>' + 
-			'<td>' + sites[0][8] + '</td>' + 
-			'<td>' + sites[0][9] + '</td>' + 
-			'<td>' + sites[0][10] + '</td>' + 
-			'<td>' + sites[0][11] + '</td>' + 
-			'<td>' + sites[0][12] + '</td>' + 
-			'<td>' + sites[0][13] + '</td>' + 
-			'<td>' + sites[0][14] + '</td>' + 
-			'<td>' + sites[0][15] + '</td>' + 
-			'<td>' + sites[0][16] + '</td>' +
-			'<td>' + sites[0][17] + '</td>' +
-
-			</tr>'
-		);*/
-
 		console.log(
 			'<table>\n' +
 
@@ -441,122 +450,266 @@ function buildArrays () {
 			'</thead>\n' +
 			'<tbody>\n' +
 			'<tr><td>Twitter</td>' +
-			'<td>' + sitesTotals[0][0] + '</td>' + 
-			'<td>' + sitesTotals[0][1] + '</td>' + 
-			'<td>' + sitesTotals[0][2] + '</td>' + 
-			'<td>' + sitesTotals[0][3] + '</td>' + 
-			'<td>' + sitesTotals[0][4] + '</td>' + 
-			'<td>' + sitesTotals[0][5] + '</td>' + 
-			'<td>' + sitesTotals[0][6] + '</td>' + 
-			'<td>' + sitesTotals[0][7] + '</td>' + 
-			'<td>' + sitesTotals[0][8] + '</td>' + 
-			'<td>' + sitesTotals[0][9] + '</td>' + 
-			'<td>' + sitesTotals[0][10] + '</td>' + 
-			'<td>' + sitesTotals[0][11] + '</td>' + 
-			'<td>' + sitesTotals[0][12] + '</td>' + 
-			'<td>' + sitesTotals[0][13] + '</td>' + 
-			'<td>' + sitesTotals[0][14] + '</td>' + 
-			'<td>' + sitesTotals[0][15] + '</td>' + 
-			'<td>' + sitesTotals[0][16] + '</td>' + 
-			'<td>' + sitesTotals[0][17] + '</td></tr>\n' +
+			'<td>' + round(sitesTotals[0][0]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][1]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][3]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][4]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][5]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][6]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][10]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][12]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][14]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][15]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][16]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][17]) + '</td></tr>\n' +
 			'<tr><td>Facebook</td>' +
-			'<td>' + sitesTotals[1][0] + '</td>' + 
-			'<td>' + sitesTotals[1][1] + '</td>' + 
-			'<td>' + sitesTotals[1][2] + '</td>' + 
-			'<td>' + sitesTotals[1][3] + '</td>' + 
-			'<td>' + sitesTotals[1][4] + '</td>' + 
-			'<td>' + sitesTotals[1][5] + '</td>' + 
-			'<td>' + sitesTotals[1][6] + '</td>' + 
-			'<td>' + sitesTotals[1][7] + '</td>' + 
-			'<td>' + sitesTotals[1][8] + '</td>' + 
-			'<td>' + sitesTotals[1][9] + '</td>' + 
-			'<td>' + sitesTotals[1][10] + '</td>' + 
-			'<td>' + sitesTotals[1][11] + '</td>' + 
-			'<td>' + sitesTotals[1][12] + '</td>' + 
-			'<td>' + sitesTotals[1][13] + '</td>' + 
-			'<td>' + sitesTotals[1][14] + '</td>' + 
-			'<td>' + sitesTotals[1][15] + '</td>' + 
-			'<td>' + sitesTotals[1][16] + '</td>' + 
-			'<td>' + sitesTotals[1][17] + '</td></tr>\n' +
+			'<td>' + round(sitesTotals[1][0]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][1]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][3]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][4]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][5]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][6]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][10]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][12]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][14]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][15]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][16]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][17]) + '</td></tr>\n' +
 			'<tr><td>Academiaedu</td>' +
-			'<td>' + sitesTotals[3][0] + '</td>' + 
-			'<td>' + sitesTotals[3][1] + '</td>' + 
-			'<td>' + sitesTotals[3][2] + '</td>' + 
-			'<td>' + sitesTotals[3][3] + '</td>' + 
-			'<td>' + sitesTotals[3][4] + '</td>' + 
-			'<td>' + sitesTotals[3][5] + '</td>' + 
-			'<td>' + sitesTotals[3][6] + '</td>' + 
-			'<td>' + sitesTotals[3][7] + '</td>' + 
-			'<td>' + sitesTotals[3][8] + '</td>' + 
-			'<td>' + sitesTotals[3][9] + '</td>' + 
-			'<td>' + sitesTotals[3][10] + '</td>' + 
-			'<td>' + sitesTotals[3][11] + '</td>' + 
-			'<td>' + sitesTotals[3][12] + '</td>' + 
-			'<td>' + sitesTotals[3][13] + '</td>' + 
-			'<td>' + sitesTotals[3][14] + '</td>' + 
-			'<td>' + sitesTotals[3][15] + '</td>' + 
-			'<td>' + sitesTotals[3][16] + '</td>' + 
-			'<td>' + sitesTotals[3][17] + '</td></tr>\n' +
+			'<td>' + round(sitesTotals[3][0]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][1]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][3]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][4]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][5]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][6]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][10]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][12]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][14]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][15]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][16]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][17]) + '</td></tr>\n' +
 			'<tr><td>ResearchGate</td>' +
-			'<td>' + sitesTotals[4][0] + '</td>' + 
-			'<td>' + sitesTotals[4][1] + '</td>' + 
-			'<td>' + sitesTotals[4][2] + '</td>' + 
-			'<td>' + sitesTotals[4][3] + '</td>' + 
-			'<td>' + sitesTotals[4][4] + '</td>' + 
-			'<td>' + sitesTotals[4][5] + '</td>' + 
-			'<td>' + sitesTotals[4][6] + '</td>' + 
-			'<td>' + sitesTotals[4][7] + '</td>' + 
-			'<td>' + sitesTotals[4][8] + '</td>' + 
-			'<td>' + sitesTotals[4][9] + '</td>' + 
-			'<td>' + sitesTotals[4][10] + '</td>' + 
-			'<td>' + sitesTotals[4][11] + '</td>' + 
-			'<td>' + sitesTotals[4][12] + '</td>' + 
-			'<td>' + sitesTotals[4][13] + '</td>' + 
-			'<td>' + sitesTotals[4][14] + '</td>' + 
-			'<td>' + sitesTotals[4][15] + '</td>' + 
-			'<td>' + sitesTotals[4][16] + '</td>' + 
-			'<td>' + sitesTotals[4][17] + '</td></tr>\n' +
+			'<td>' + round(sitesTotals[4][0]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][1]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][3]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][4]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][5]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][6]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][10]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][12]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][14]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][15]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][16]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][17]) + '</td></tr>\n' +
 			'<tr><td>LinkedIn</td>' +
-			'<td>' + sitesTotals[5][0] + '</td>' + 
-			'<td>' + sitesTotals[5][1] + '</td>' + 
-			'<td>' + sitesTotals[5][2] + '</td>' + 
-			'<td>' + sitesTotals[5][3] + '</td>' + 
-			'<td>' + sitesTotals[5][4] + '</td>' + 
-			'<td>' + sitesTotals[5][5] + '</td>' + 
-			'<td>' + sitesTotals[5][6] + '</td>' + 
-			'<td>' + sitesTotals[5][7] + '</td>' + 
-			'<td>' + sitesTotals[5][8] + '</td>' + 
-			'<td>' + sitesTotals[5][9] + '</td>' + 
-			'<td>' + sitesTotals[5][10] + '</td>' + 
-			'<td>' + sitesTotals[5][11] + '</td>' + 
-			'<td>' + sitesTotals[5][12] + '</td>' + 
-			'<td>' + sitesTotals[5][13] + '</td>' + 
-			'<td>' + sitesTotals[5][14] + '</td>' + 
-			'<td>' + sitesTotals[5][15] + '</td>' + 
-			'<td>' + sitesTotals[5][16] + '</td>' + 
-			'<td>' + sitesTotals[5][17] + '</td></tr>\n' +
+			'<td>' + round(sitesTotals[5][0]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][1]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][3]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][4]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][5]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][6]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][10]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][12]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][14]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][15]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][16]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][17]) + '</td></tr>\n' +
 			'<tr><td>Mendeley</td>' +
-			'<td>' + sitesTotals[8][0] + '</td>' + 
-			'<td>' + sitesTotals[8][1] + '</td>' + 
-			'<td>' + sitesTotals[8][2] + '</td>' + 
-			'<td>' + sitesTotals[8][3] + '</td>' + 
-			'<td>' + sitesTotals[8][4] + '</td>' + 
-			'<td>' + sitesTotals[8][5] + '</td>' + 
-			'<td>' + sitesTotals[8][6] + '</td>' + 
-			'<td>' + sitesTotals[8][7] + '</td>' + 
-			'<td>' + sitesTotals[8][8] + '</td>' + 
-			'<td>' + sitesTotals[8][9] + '</td>' + 
-			'<td>' + sitesTotals[8][10] + '</td>' + 
-			'<td>' + sitesTotals[8][11] + '</td>' + 
-			'<td>' + sitesTotals[8][12] + '</td>' + 
-			'<td>' + sitesTotals[8][13] + '</td>' + 
-			'<td>' + sitesTotals[8][14] + '</td>' + 
-			'<td>' + sitesTotals[8][15] + '</td>' + 
-			'<td>' + sitesTotals[8][16] + '</td>' + 
-			'<td>' + sitesTotals[8][17] + '</td></tr>\n' +
+			'<td>' + round(sitesTotals[8][0]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][1]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][3]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][4]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][5]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][6]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][10]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][12]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][14]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][15]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][16]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][17]) + '</td></tr>\n' +
 			'</tbody>\n' +
 			'</table>'
 		);
+
+
+		/*console.log(
+			'<table>\n' +
+
+			'<thead>' +
+			'<tr><th>Site</th>' +
+			'<th>Not professionally</th>' +
+			'<th>Curiosity</th>' +
+			'<th>Contact</th>' +
+			'<th>Post content</th>' +
+			'<th>Discussing research</th>' +
+			'<th>Discussing issues</th>' +
+			'<th>Commenting</th>' +
+			'<th>Job</th>' +
+			'<th>funding</th>' +
+			'<th>Discovering peers</th>' +
+			'<th>Contacting peers</th>' +
+			'<th>Discovering individuals</th>' +
+			'<th>Contacting individuals</th>' +
+			'<th>Research papers</th>' +
+			'<th>Links</th>' +
+			'<th>Other discussions</th>' +
+			'<th>Metrics</th>' +
+			'<th>Number of respondents</th></tr>' +
+			'</thead>\n' +
+			'<tbody>\n' +
+			'<tr><td>Twitter</td>' +
+			'<td>' + sites[0][0] + '</td>' + 
+			'<td>' + sites[0][1] + '</td>' + 
+			'<td>' + sites[0][2] + '</td>' + 
+			'<td>' + sites[0][3] + '</td>' + 
+			'<td>' + sites[0][4] + '</td>' + 
+			'<td>' + sites[0][5] + '</td>' + 
+			'<td>' + sites[0][6] + '</td>' + 
+			'<td>' + sites[0][7] + '</td>' + 
+			'<td>' + sites[0][8] + '</td>' + 
+			'<td>' + sites[0][9] + '</td>' + 
+			'<td>' + sites[0][10] + '</td>' + 
+			'<td>' + sites[0][11] + '</td>' + 
+			'<td>' + sites[0][12] + '</td>' + 
+			'<td>' + sites[0][13] + '</td>' + 
+			'<td>' + sites[0][14] + '</td>' + 
+			'<td>' + sites[0][15] + '</td>' + 
+			'<td>' + sites[0][16] + '</td>' + 
+			'<td>' + sitesTotals[0][17] + '</td></tr>\n' +
+			'<tr><td>Facebook</td>' +
+			'<td>' + sites[1][0] + '</td>' + 
+			'<td>' + sites[1][1] + '</td>' + 
+			'<td>' + sites[1][2] + '</td>' + 
+			'<td>' + sites[1][3] + '</td>' + 
+			'<td>' + sites[1][4] + '</td>' + 
+			'<td>' + sites[1][5] + '</td>' + 
+			'<td>' + sites[1][6] + '</td>' + 
+			'<td>' + sites[1][7] + '</td>' + 
+			'<td>' + sites[1][8] + '</td>' + 
+			'<td>' + sites[1][9] + '</td>' + 
+			'<td>' + sites[1][10] + '</td>' + 
+			'<td>' + sites[1][11] + '</td>' + 
+			'<td>' + sites[1][12] + '</td>' + 
+			'<td>' + sites[1][13] + '</td>' + 
+			'<td>' + sites[1][14] + '</td>' + 
+			'<td>' + sites[1][15] + '</td>' + 
+			'<td>' + sites[1][16] + '</td>' + 
+			'<td>' + sitesTotals[1][17] + '</td></tr>\n' +
+			'<tr><td>Academiaedu</td>' +
+			'<td>' + sites[3][0] + '</td>' + 
+			'<td>' + sites[3][1] + '</td>' + 
+			'<td>' + sites[3][2] + '</td>' + 
+			'<td>' + sites[3][3] + '</td>' + 
+			'<td>' + sites[3][4] + '</td>' + 
+			'<td>' + sites[3][5] + '</td>' + 
+			'<td>' + sites[3][6] + '</td>' + 
+			'<td>' + sites[3][7] + '</td>' + 
+			'<td>' + sites[3][8] + '</td>' + 
+			'<td>' + sites[3][9] + '</td>' + 
+			'<td>' + sites[3][10] + '</td>' + 
+			'<td>' + sites[3][11] + '</td>' + 
+			'<td>' + sites[3][12] + '</td>' + 
+			'<td>' + sites[3][13] + '</td>' + 
+			'<td>' + sites[3][14] + '</td>' + 
+			'<td>' + sites[3][15] + '</td>' + 
+			'<td>' + sites[3][16] + '</td>' + 
+			'<td>' + sitesTotals[3][17] + '</td></tr>\n' +
+			'<tr><td>ResearchGate</td>' +
+			'<td>' + sites[4][0] + '</td>' + 
+			'<td>' + sites[4][1] + '</td>' + 
+			'<td>' + sites[4][2] + '</td>' + 
+			'<td>' + sites[4][3] + '</td>' + 
+			'<td>' + sites[4][4] + '</td>' + 
+			'<td>' + sites[4][5] + '</td>' + 
+			'<td>' + sites[4][6] + '</td>' + 
+			'<td>' + sites[4][7] + '</td>' + 
+			'<td>' + sites[4][8] + '</td>' + 
+			'<td>' + sites[4][9] + '</td>' + 
+			'<td>' + sites[4][10] + '</td>' + 
+			'<td>' + sites[4][11] + '</td>' + 
+			'<td>' + sites[4][12] + '</td>' + 
+			'<td>' + sites[4][13] + '</td>' + 
+			'<td>' + sites[4][14] + '</td>' + 
+			'<td>' + sites[4][15] + '</td>' + 
+			'<td>' + sites[4][16] + '</td>' + 
+			'<td>' + sitesTotals[4][17] + '</td></tr>\n' +
+			'<tr><td>LinkedIn</td>' +
+			'<td>' + sites[5][0] + '</td>' + 
+			'<td>' + sites[5][1] + '</td>' + 
+			'<td>' + sites[5][2] + '</td>' + 
+			'<td>' + sites[5][3] + '</td>' + 
+			'<td>' + sites[5][4] + '</td>' + 
+			'<td>' + sites[5][5] + '</td>' + 
+			'<td>' + sites[5][6] + '</td>' + 
+			'<td>' + sites[5][7] + '</td>' + 
+			'<td>' + sites[5][8] + '</td>' + 
+			'<td>' + sites[5][9] + '</td>' + 
+			'<td>' + sites[5][10] + '</td>' + 
+			'<td>' + sites[5][11] + '</td>' + 
+			'<td>' + sites[5][12] + '</td>' + 
+			'<td>' + sites[5][13] + '</td>' + 
+			'<td>' + sites[5][14] + '</td>' + 
+			'<td>' + sites[5][15] + '</td>' + 
+			'<td>' + sites[5][16] + '</td>' + 
+			'<td>' + sitesTotals[5][17] + '</td></tr>\n' +
+			'<tr><td>Mendeley</td>' +
+			'<td>' + sites[8][0] + '</td>' + 
+			'<td>' + sites[8][1] + '</td>' + 
+			'<td>' + sites[8][2] + '</td>' + 
+			'<td>' + sites[8][3] + '</td>' + 
+			'<td>' + sites[8][4] + '</td>' + 
+			'<td>' + sites[8][5] + '</td>' + 
+			'<td>' + sites[8][6] + '</td>' + 
+			'<td>' + sites[8][7] + '</td>' + 
+			'<td>' + sites[8][8] + '</td>' + 
+			'<td>' + sites[8][9] + '</td>' + 
+			'<td>' + sites[8][10] + '</td>' + 
+			'<td>' + sites[8][11] + '</td>' + 
+			'<td>' + sites[8][12] + '</td>' + 
+			'<td>' + sites[8][13] + '</td>' + 
+			'<td>' + sites[8][14] + '</td>' + 
+			'<td>' + sites[8][15] + '</td>' + 
+			'<td>' + sites[8][16] + '</td>' + 
+			'<td>' + sitesTotals[8][17] + '</td></tr>\n' +
+			'</tbody>\n' +
+			'</table>'
+		);*/
 
 	});
 	// return sites;
