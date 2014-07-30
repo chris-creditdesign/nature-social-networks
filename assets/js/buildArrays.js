@@ -420,32 +420,28 @@ function buildArrays () {
 
 			sitesTotals[i].push(totalResponses[i]);
 		};
-
-
-		console.log(round(47.97843666));
 		
 		console.log(
 			'<table>\n' +
-
 			'<thead>' +
 			'<tr><th>Site</th>' +
-			'<th>Not professionally</th>' +
-			'<th>Curiosity</th>' +
-			'<th>Contact</th>' +
-			'<th>Post content</th>' +
-			'<th>Discussing research</th>' +
-			'<th>Discussing issues</th>' +
-			'<th>Commenting</th>' +
-			'<th>Job</th>' +
-			'<th>funding</th>' +
-			'<th>Discovering peers</th>' +
-			'<th>Contacting peers</th>' +
-			'<th>Discovering individuals</th>' +
-			'<th>Contacting individuals</th>' +
-			'<th>Research papers</th>' +
-			'<th>Links</th>' +
-			'<th>Other discussions</th>' +
-			'<th>Metrics</th>' +
+			'<th>I do not use this site professionally</th>' +
+			'<th>I have a profile because I signed up out of curiosity, but am not purposefully maintaining it</th>' +
+			'<th>I maintain a profile in case someone wishes to contact me about my research</th>' +
+			'<th>Discovering job opportunities</th>' +
+			'<th>Discovering funding opportunities</th>' +
+			'<th>Discovering peers in my field of research</th>' +
+			'<th>Discovering individuals outside of my field of research</th>' +
+			'<th>Discovering recommended research papers</th>' +
+			'<th>To track metrics relating to interest in my work</th>' +
+			'<th>I post content related to my work</th>' +
+			'<th>Actively discussing my research</th>' +
+			'<th>Actively discussing issues related to my role (eg tenure, policy, training)</th>' +
+			'<th>Commenting on research that is relevant to my field</th>' +
+			'<th>Contacting peers in my field of research</th>' +
+			'<th>Contacting individuals outside of my field of research</th>' +
+			'<th>Sharing links to authored content (e.g. research papers, datasets)</th>' +
+			'<th>Following other discussions on research-related issues</th>' +
 			'<th>Number of respondents</th></tr>' +
 			'</thead>\n' +
 			'<tbody>\n' +
@@ -453,115 +449,115 @@ function buildArrays () {
 			'<td>' + round(sitesTotals[0][0]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][1]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][3]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][4]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][5]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][6]) + '</td>' + 
-			'<td>' + round(sitesTotals[0][7]) + '</td>' + 
-			'<td>' + round(sitesTotals[0][8]) + '</td>' + 
-			'<td>' + round(sitesTotals[0][9]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][10]) + '</td>' + 
-			'<td>' + round(sitesTotals[0][11]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][12]) + '</td>' + 
-			'<td>' + round(sitesTotals[0][13]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][14]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][15]) + '</td>' + 
-			'<td>' + round(sitesTotals[0][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][17]) + '</td></tr>\n' +
 			'<tr><td>Facebook</td>' +
 			'<td>' + round(sitesTotals[1][0]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][1]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][3]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][4]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][5]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][6]) + '</td>' + 
-			'<td>' + round(sitesTotals[1][7]) + '</td>' + 
-			'<td>' + round(sitesTotals[1][8]) + '</td>' + 
-			'<td>' + round(sitesTotals[1][9]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][10]) + '</td>' + 
-			'<td>' + round(sitesTotals[1][11]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][12]) + '</td>' + 
-			'<td>' + round(sitesTotals[1][13]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][14]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][15]) + '</td>' + 
-			'<td>' + round(sitesTotals[1][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][17]) + '</td></tr>\n' +
 			'<tr><td>Academiaedu</td>' +
 			'<td>' + round(sitesTotals[3][0]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][1]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][3]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][4]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][5]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][6]) + '</td>' + 
-			'<td>' + round(sitesTotals[3][7]) + '</td>' + 
-			'<td>' + round(sitesTotals[3][8]) + '</td>' + 
-			'<td>' + round(sitesTotals[3][9]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][10]) + '</td>' + 
-			'<td>' + round(sitesTotals[3][11]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][12]) + '</td>' + 
-			'<td>' + round(sitesTotals[3][13]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][14]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][15]) + '</td>' + 
-			'<td>' + round(sitesTotals[3][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][17]) + '</td></tr>\n' +
 			'<tr><td>ResearchGate</td>' +
 			'<td>' + round(sitesTotals[4][0]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][1]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][3]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][4]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][5]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][6]) + '</td>' + 
-			'<td>' + round(sitesTotals[4][7]) + '</td>' + 
-			'<td>' + round(sitesTotals[4][8]) + '</td>' + 
-			'<td>' + round(sitesTotals[4][9]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][10]) + '</td>' + 
-			'<td>' + round(sitesTotals[4][11]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][12]) + '</td>' + 
-			'<td>' + round(sitesTotals[4][13]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][14]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][15]) + '</td>' + 
-			'<td>' + round(sitesTotals[4][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][17]) + '</td></tr>\n' +
 			'<tr><td>LinkedIn</td>' +
 			'<td>' + round(sitesTotals[5][0]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][1]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][3]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][4]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][5]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][6]) + '</td>' + 
-			'<td>' + round(sitesTotals[5][7]) + '</td>' + 
-			'<td>' + round(sitesTotals[5][8]) + '</td>' + 
-			'<td>' + round(sitesTotals[5][9]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][10]) + '</td>' + 
-			'<td>' + round(sitesTotals[5][11]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][12]) + '</td>' + 
-			'<td>' + round(sitesTotals[5][13]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][14]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][15]) + '</td>' + 
-			'<td>' + round(sitesTotals[5][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][17]) + '</td></tr>\n' +
 			'<tr><td>Mendeley</td>' +
 			'<td>' + round(sitesTotals[8][0]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][1]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][3]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][4]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][5]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][6]) + '</td>' + 
-			'<td>' + round(sitesTotals[8][7]) + '</td>' + 
-			'<td>' + round(sitesTotals[8][8]) + '</td>' + 
-			'<td>' + round(sitesTotals[8][9]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][10]) + '</td>' + 
-			'<td>' + round(sitesTotals[8][11]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][12]) + '</td>' + 
-			'<td>' + round(sitesTotals[8][13]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][14]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][15]) + '</td>' + 
-			'<td>' + round(sitesTotals[8][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][17]) + '</td></tr>\n' +
 			'</tbody>\n' +
 			'</table>'

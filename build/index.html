@@ -48,12 +48,13 @@
 
 
 <style scoped>
-.status-message{border:1px solid #c00;background:#fac7c7;padding:10px}.outerwrapper{width:100%;min-height:900px;position:relative;border:1px solid #c8c7cf}.outerwrapper h2,.outerwrapper h3,.outerwrapper p{padding:10px 10px 0;margin:0}.outerwrapper .chooseNetwork{text-align:center}.outerwrapper .chooseNetwork ul#networkSelect{padding:0 160px}.outerwrapper .chooseNetwork ul#networkSelect li{display:inline;margin:0 10px}.outerwrapper .chooseNetwork ul#networkSelect span{position:relative;top:4px;height:20px;width:20px}.outerwrapper .chooseNetwork ul#networkSelect input{outline:0!important;opacity:0;filter:alpha(opacity=0);zoom:1;float:left;margin-left:-40px}.outerwrapper .chooseNetwork ul#networkSelect input+label>span>svg>polygon{opacity:0}.outerwrapper .chooseNetwork ul#networkSelect input:checked+label>span>svg>polygon{opacity:1}.outerwrapper .chart svg text{font-size:.8em}
+.status-message{border:1px solid #c00;background:#fac7c7;padding:10px}.outerwrapper{width:100%;min-height:900px;position:relative;border:1px solid #c8c7cf}.outerwrapper h2,.outerwrapper h3,.outerwrapper p{padding:10px 10px 0;margin:0}.outerwrapper .chooseNetwork{text-align:center}.outerwrapper .chooseNetwork ul#networkSelect{padding:0 160px}.outerwrapper .chooseNetwork ul#networkSelect li{display:inline;margin:0 10px}.outerwrapper .chooseNetwork ul#networkSelect span{position:relative;top:4px;height:20px;width:20px}.outerwrapper .chooseNetwork ul#networkSelect input{outline:0!important;opacity:0;filter:alpha(opacity=0);zoom:1;float:left;margin-left:-40px}.outerwrapper .chooseNetwork ul#networkSelect input+label>span>svg>polygon{opacity:0}.outerwrapper .chooseNetwork ul#networkSelect input:checked+label>span>svg>polygon{opacity:1}.outerwrapper .options ol#optionDescriptions{padding-left:40px}.outerwrapper .options ol#optionDescriptions li{list-style-type:decimal}.outerwrapper .chart svg text{font-size:.8em}.outerwrapper .chart svg text.options{font-size:1.2em}
 </style>
 <div class="outerwrapper">
 	<div class="chart"></div>
 
 	<div class="chooseNetwork"></div>
+	<div class="options"></div>
 </div>
 
 
@@ -146,15 +147,28 @@ function buildTicks (margin, width, height, radiusScale, scaleLines) {
 			return d + "%";
 		});
 }
-function buildLabels (margin, width, height, radiusScale, scaleLines, questions, baseRad) {
+function buildList (options) {
+	/* Create numbered list for options */
+	d3.select(".options")
+		.append("ol")
+		.attr("id","optionDescriptions")
+		.selectAll('li')
+	  .data(options)
+	  	.enter()
+		.append("li")
+		.html(function (d, i) {
+			return d;
+		});
+}
+function buildLabels (margin, width, height, radiusScale, scaleLines, options, baseRad) {
 	var myLabels = d3.select(".chart").select("svg").append("g")
 		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + ")");
 
 	myLabels.selectAll('text')
-		.data(questions)
+		.data(options)
 		.enter()
 		.append('svg:text')
-		.attr('class','questions')
+		.attr('class','options')
 		.attr('x', function (d,i) {
 			var xPos = radiusScale(d3.max(scaleLines)*1.1) * Math.cos((baseRad*i) - (baseRad*4.25));
 			return xPos;
@@ -164,9 +178,10 @@ function buildLabels (margin, width, height, radiusScale, scaleLines, questions,
 			return yPos;
 		})
 		.attr('text-anchor','middle')
+		.attr('font-weight','bold')
 		.attr("dy", ".35em")
-		.text(function (d) {
-			return d;
+		.text(function (d,i) {
+			return (i+1);
 		});
 }
 function buildLines (margin, width, height, radiusScale, scaleLines, dataSetLength, strokeColour, baseAngle) {
@@ -202,9 +217,9 @@ function buildScales (margin, width, height, radiusScale, scaleLines, strokeColo
 		.attr('fill', 'none')
 		.attr('stroke', strokeColour);
 }
-function buildGraphic(dataSet, margin, width, height, radiusScale, lowOpacityLevel, colour, baseRad, baseAngle) {
+function buildGraphic(dataSet, allSites, margin, width, height, radiusScale, lowOpacityLevel, colour, baseRad, baseAngle) {
 	
-	var networkSelect = jQuery('#networkSelect');
+	var question1 = [];
 
 	var myGroup = d3.select(".chart").select("svg").append("g")
 		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + "), rotate(" + (baseAngle * -1) +")");
@@ -214,6 +229,12 @@ function buildGraphic(dataSet, margin, width, height, radiusScale, lowOpacityLev
 		myArc.outerRadius(function (d) { return radiusScale(d) } );
 		myArc.startAngle(function (d,i) { return baseRad * i } );
 		myArc.endAngle(function (d,i) { return baseRad * (i + 1) });
+
+	/*var myArcTest = d3.svg.arc();
+		myArc.innerRadius(0);
+		myArc.outerRadius(function (d) { return radiusScale(d) } );
+		myArc.startAngle(function (d,i) { return 0} );
+		myArc.endAngle(function (d,i) { return baseRad });*/
 
 
 	function buildArcs (i) {
@@ -230,6 +251,34 @@ function buildGraphic(dataSet, margin, width, height, radiusScale, lowOpacityLev
 			.attr('stroke-width', '1')
 			.attr('opacity',lowOpacityLevel);
 	}
+
+	/*for (var i = 0; i < dataSet.length; i++) {
+		var myArray = new Array;
+		myArray.site = allSites[i]; 
+		myArray.value = dataSet[i][0];
+
+		question1.push(myArray);
+	};*/
+
+	// console.log(question1);
+
+	/*employees.sort(function(a, b){
+		return a.age-b.age
+	})*/
+
+	// console.log(Object.keys(question1)[0]);
+
+	/*for (var key in question1) {
+	   var obj = question1[key];
+	   
+	   for (var prop in obj) {
+	      // important check that this is objects own property 
+	      // not from prototype prop inherited
+	      if(obj.hasOwnProperty(prop)){
+	        alert(prop + " = " + obj[prop]);
+	      }
+	   }
+	}*/
 
 	for (var i = 0; i < dataSet.length; i++) {
 		buildArcs(i);
@@ -657,32 +706,28 @@ function buildArrays () {
 
 			sitesTotals[i].push(totalResponses[i]);
 		};
-
-
-		console.log(round(47.97843666));
 		
 		console.log(
 			'<table>\n' +
-
 			'<thead>' +
 			'<tr><th>Site</th>' +
-			'<th>Not professionally</th>' +
-			'<th>Curiosity</th>' +
-			'<th>Contact</th>' +
-			'<th>Post content</th>' +
-			'<th>Discussing research</th>' +
-			'<th>Discussing issues</th>' +
-			'<th>Commenting</th>' +
-			'<th>Job</th>' +
-			'<th>funding</th>' +
-			'<th>Discovering peers</th>' +
-			'<th>Contacting peers</th>' +
-			'<th>Discovering individuals</th>' +
-			'<th>Contacting individuals</th>' +
-			'<th>Research papers</th>' +
-			'<th>Links</th>' +
-			'<th>Other discussions</th>' +
-			'<th>Metrics</th>' +
+			'<th>I do not use this site professionally</th>' +
+			'<th>I have a profile because I signed up out of curiosity, but am not purposefully maintaining it</th>' +
+			'<th>I maintain a profile in case someone wishes to contact me about my research</th>' +
+			'<th>Discovering job opportunities</th>' +
+			'<th>Discovering funding opportunities</th>' +
+			'<th>Discovering peers in my field of research</th>' +
+			'<th>Discovering individuals outside of my field of research</th>' +
+			'<th>Discovering recommended research papers</th>' +
+			'<th>To track metrics relating to interest in my work</th>' +
+			'<th>I post content related to my work</th>' +
+			'<th>Actively discussing my research</th>' +
+			'<th>Actively discussing issues related to my role (eg tenure, policy, training)</th>' +
+			'<th>Commenting on research that is relevant to my field</th>' +
+			'<th>Contacting peers in my field of research</th>' +
+			'<th>Contacting individuals outside of my field of research</th>' +
+			'<th>Sharing links to authored content (e.g. research papers, datasets)</th>' +
+			'<th>Following other discussions on research-related issues</th>' +
 			'<th>Number of respondents</th></tr>' +
 			'</thead>\n' +
 			'<tbody>\n' +
@@ -690,115 +735,115 @@ function buildArrays () {
 			'<td>' + round(sitesTotals[0][0]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][1]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[0][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][3]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][4]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][5]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][6]) + '</td>' + 
-			'<td>' + round(sitesTotals[0][7]) + '</td>' + 
-			'<td>' + round(sitesTotals[0][8]) + '</td>' + 
-			'<td>' + round(sitesTotals[0][9]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][10]) + '</td>' + 
-			'<td>' + round(sitesTotals[0][11]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][12]) + '</td>' + 
-			'<td>' + round(sitesTotals[0][13]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][14]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][15]) + '</td>' + 
-			'<td>' + round(sitesTotals[0][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[0][17]) + '</td></tr>\n' +
 			'<tr><td>Facebook</td>' +
 			'<td>' + round(sitesTotals[1][0]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][1]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[1][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][3]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][4]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][5]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][6]) + '</td>' + 
-			'<td>' + round(sitesTotals[1][7]) + '</td>' + 
-			'<td>' + round(sitesTotals[1][8]) + '</td>' + 
-			'<td>' + round(sitesTotals[1][9]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][10]) + '</td>' + 
-			'<td>' + round(sitesTotals[1][11]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][12]) + '</td>' + 
-			'<td>' + round(sitesTotals[1][13]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][14]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][15]) + '</td>' + 
-			'<td>' + round(sitesTotals[1][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[1][17]) + '</td></tr>\n' +
 			'<tr><td>Academiaedu</td>' +
 			'<td>' + round(sitesTotals[3][0]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][1]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[3][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][3]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][4]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][5]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][6]) + '</td>' + 
-			'<td>' + round(sitesTotals[3][7]) + '</td>' + 
-			'<td>' + round(sitesTotals[3][8]) + '</td>' + 
-			'<td>' + round(sitesTotals[3][9]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][10]) + '</td>' + 
-			'<td>' + round(sitesTotals[3][11]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][12]) + '</td>' + 
-			'<td>' + round(sitesTotals[3][13]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][14]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][15]) + '</td>' + 
-			'<td>' + round(sitesTotals[3][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[3][17]) + '</td></tr>\n' +
 			'<tr><td>ResearchGate</td>' +
 			'<td>' + round(sitesTotals[4][0]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][1]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[4][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][3]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][4]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][5]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][6]) + '</td>' + 
-			'<td>' + round(sitesTotals[4][7]) + '</td>' + 
-			'<td>' + round(sitesTotals[4][8]) + '</td>' + 
-			'<td>' + round(sitesTotals[4][9]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][10]) + '</td>' + 
-			'<td>' + round(sitesTotals[4][11]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][12]) + '</td>' + 
-			'<td>' + round(sitesTotals[4][13]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][14]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][15]) + '</td>' + 
-			'<td>' + round(sitesTotals[4][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[4][17]) + '</td></tr>\n' +
 			'<tr><td>LinkedIn</td>' +
 			'<td>' + round(sitesTotals[5][0]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][1]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[5][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][3]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][4]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][5]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][6]) + '</td>' + 
-			'<td>' + round(sitesTotals[5][7]) + '</td>' + 
-			'<td>' + round(sitesTotals[5][8]) + '</td>' + 
-			'<td>' + round(sitesTotals[5][9]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][10]) + '</td>' + 
-			'<td>' + round(sitesTotals[5][11]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][12]) + '</td>' + 
-			'<td>' + round(sitesTotals[5][13]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][14]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][15]) + '</td>' + 
-			'<td>' + round(sitesTotals[5][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[5][17]) + '</td></tr>\n' +
 			'<tr><td>Mendeley</td>' +
 			'<td>' + round(sitesTotals[8][0]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][1]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][2]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][7]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][8]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][9]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][11]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][13]) + '</td>' + 
+			'<td>' + round(sitesTotals[8][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][3]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][4]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][5]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][6]) + '</td>' + 
-			'<td>' + round(sitesTotals[8][7]) + '</td>' + 
-			'<td>' + round(sitesTotals[8][8]) + '</td>' + 
-			'<td>' + round(sitesTotals[8][9]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][10]) + '</td>' + 
-			'<td>' + round(sitesTotals[8][11]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][12]) + '</td>' + 
-			'<td>' + round(sitesTotals[8][13]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][14]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][15]) + '</td>' + 
-			'<td>' + round(sitesTotals[8][16]) + '</td>' + 
 			'<td>' + round(sitesTotals[8][17]) + '</td></tr>\n' +
 			'</tbody>\n' +
 			'</table>'
@@ -2042,7 +2087,7 @@ function buildObjects () {
 		var lowOpacityLevel = 0.7;
 
 		var dataSet = [];
-		var questions = [];
+		var options = [];
 		var allSites = [];
 
 		var tableRows;
@@ -2060,7 +2105,6 @@ function buildObjects () {
 			// $.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 			$.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 				// buildObjects(); 
-				
 				// buildArrays();
 		
 				/* Scale for pie radius */
@@ -2092,17 +2136,18 @@ function buildObjects () {
 						headerRows = $(data).find("thead tr").find('th');
 
 						for (var i = 1; i < headerRows.length -1; i++) {
-							questions.push(headerRows.eq(i).text());
+							options.push(headerRows.eq(i).text());
 						};
 
 						baseRad = (Math.PI * 2) / dataSet[0].length;
 						baseAngle = 180 / dataSet[0].length;
 
 						buildSVG(margin, width, height);
-						buildGraphic(dataSet, margin, width, height, radiusScale, lowOpacityLevel, colour, baseRad, baseAngle);
+						buildGraphic(dataSet, allSites, margin, width, height, radiusScale, lowOpacityLevel, colour, baseRad, baseAngle);
 						buildScales(margin, width, height, radiusScale, scaleLines, strokeColour);
 						buildLines(margin, width, height, radiusScale, scaleLines, dataSet[0].length, strokeColour, baseAngle);
-						buildLabels(margin, width, height, radiusScale, scaleLines, questions, baseRad);
+						buildList(options);
+						buildLabels(margin, width, height, radiusScale, scaleLines, options, baseRad);
 						buildTicks(margin, width, height, radiusScale, scaleLines);
 						buildCheckboxes(allSites, colour, lowOpacityLevel, strokeColour);
 						fadeOutArcs(lowOpacityLevel);

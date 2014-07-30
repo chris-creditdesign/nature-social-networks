@@ -32,7 +32,7 @@
 		var lowOpacityLevel = 0.7;
 
 		var dataSet = [];
-		var questions = [];
+		var options = [];
 		var allSites = [];
 
 		var tableRows;
@@ -50,7 +50,6 @@
 			// $.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 			$.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 				// buildObjects(); 
-				
 				// buildArrays();
 		
 				/* Scale for pie radius */
@@ -82,17 +81,18 @@
 						headerRows = $(data).find("thead tr").find('th');
 
 						for (var i = 1; i < headerRows.length -1; i++) {
-							questions.push(headerRows.eq(i).text());
+							options.push(headerRows.eq(i).text());
 						};
 
 						baseRad = (Math.PI * 2) / dataSet[0].length;
 						baseAngle = 180 / dataSet[0].length;
 
 						buildSVG(margin, width, height);
-						buildGraphic(dataSet, margin, width, height, radiusScale, lowOpacityLevel, colour, baseRad, baseAngle);
+						buildGraphic(dataSet, allSites, margin, width, height, radiusScale, lowOpacityLevel, colour, baseRad, baseAngle);
 						buildScales(margin, width, height, radiusScale, scaleLines, strokeColour);
 						buildLines(margin, width, height, radiusScale, scaleLines, dataSet[0].length, strokeColour, baseAngle);
-						buildLabels(margin, width, height, radiusScale, scaleLines, questions, baseRad);
+						buildList(options);
+						buildLabels(margin, width, height, radiusScale, scaleLines, options, baseRad);
 						buildTicks(margin, width, height, radiusScale, scaleLines);
 						buildCheckboxes(allSites, colour, lowOpacityLevel, strokeColour);
 						fadeOutArcs(lowOpacityLevel);
