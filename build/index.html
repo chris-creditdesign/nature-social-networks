@@ -252,13 +252,13 @@ function buildGraphic(dataSet, allSites, margin, width, height, radiusScale, low
 			.attr('opacity',lowOpacityLevel);
 	}
 
-	/*for (var i = 0; i < dataSet.length; i++) {
+	for (var i = 0; i < dataSet.length; i++) {
 		var myArray = new Array;
 		myArray.site = allSites[i]; 
 		myArray.value = dataSet[i][0];
 
 		question1.push(myArray);
-	};*/
+	};
 
 	// console.log(question1);
 
@@ -316,6 +316,7 @@ function buildArrays () {
 		var sitesTotals = [];
 
 		var totalResponses = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+		var blapResponses = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 		
 		for (var i = 0; i < data.length; i++) {
 
@@ -409,6 +410,8 @@ function buildArrays () {
 
 			if (data[i].selectedSites_5 === "1") {
 				if (data[i].q10_1_5 === "1" || data[i].q10_1_5 === "0") totalResponses[4]++;
+
+				blapResponses[4] = blapResponses[4] + 1;
 
 				if (data[i].q10_1_5 === "1") 	sites[4][0]++;
 				if (data[i].q10_2_5 === "1") 	sites[4][1]++;
@@ -695,19 +698,22 @@ function buildArrays () {
 
 		};
 		
-		for (var i = 0; i < sites.length; i++) {
+		// for (var i = 0; i < sites.length; i++) {
 			
-			sitesTotals.push(new Array);
+		// 	sitesTotals.push(new Array);
 
-			for (var l = 0; l < sites[i].length; l++) {
-				var perCent = (sites[i][l] / totalResponses[i]) * 100;
-				sitesTotals[i].push(perCent);
-			};
+		// 	for (var l = 0; l < sites[i].length; l++) {
+		// 		var perCent = (sites[i][l] / totalResponses[i]) * 100;
+		// 		sitesTotals[i].push(perCent);
+		// 	};
 
-			sitesTotals[i].push(totalResponses[i]);
-		};
+		// 	sitesTotals[i].push(totalResponses[i]);
+		// };
+
+		console.log(totalResponses);
+		console.log(blapResponses);
 		
-		console.log(
+		/*console.log(
 			'<table>\n' +
 			'<thead>' +
 			'<tr><th>Site</th>' +
@@ -847,7 +853,7 @@ function buildArrays () {
 			'<td>' + round(sitesTotals[8][17]) + '</td></tr>\n' +
 			'</tbody>\n' +
 			'</table>'
-		);
+		);*/
 
 
 		/*console.log(
@@ -1029,6 +1035,7 @@ function buildObjects () {
 
 	d3.csv("data/raw-unredacted-data-cleaned.csv", function(data) {
 
+		var blapResponses = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 		var sites = {
 
@@ -1424,6 +1431,9 @@ function buildObjects () {
 			}
 
 			if (data[i].selectedSites_5 === "1") {
+
+				blapResponses[4] = blapResponses[4] + 1;
+
 				if (data[i].q10_1_5 === "1") 	sites.selectedSites_5.notProfessionally++;
 				if (data[i].q10_2_5 === "1") 	sites.selectedSites_5.curiosity++;
 				if (data[i].q10_3_5 === "1") 	sites.selectedSites_5.contact++;
@@ -1686,10 +1696,10 @@ function buildObjects () {
 
 
 		};
-		console.log(sites);
+		// console.log(sites);
+		console.log(blapResponses);
 
-
-		console.log(
+		/*console.log(
 			'<table>\n' +
 
 			'<thead>' +
@@ -2021,7 +2031,7 @@ function buildObjects () {
 			'<td>' + sites.selectedSites_17.metrics + '</td></tr>\n' +
 			'</tbody>\n' +
 			'</table>'
-		);
+		);*/
 		
 	});
 
@@ -2102,8 +2112,8 @@ function buildObjects () {
 			/*	Load D3 */
 			/*	All of the D3/svg code is contained within the call back function */
 			/*	Loading D3 into ie6-8 seems to cause a runtime error */
-			// $.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
-			$.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			// $.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 				// buildObjects(); 
 				// buildArrays();
 		
@@ -2114,8 +2124,8 @@ function buildObjects () {
 
 
 				$.ajax({
-					// url: "data/table.html",
-					url: "https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701",
+					url: "data/table.html",
+					// url: "https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701",
 					dataType: 'text',
 					success: function (data) {
 

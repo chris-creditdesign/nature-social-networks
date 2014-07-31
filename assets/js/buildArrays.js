@@ -30,6 +30,7 @@ function buildArrays () {
 		var sitesTotals = [];
 
 		var totalResponses = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+		var blapResponses = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 		
 		for (var i = 0; i < data.length; i++) {
 
@@ -123,6 +124,8 @@ function buildArrays () {
 
 			if (data[i].selectedSites_5 === "1") {
 				if (data[i].q10_1_5 === "1" || data[i].q10_1_5 === "0") totalResponses[4]++;
+
+				blapResponses[4] = blapResponses[4] + 1;
 
 				if (data[i].q10_1_5 === "1") 	sites[4][0]++;
 				if (data[i].q10_2_5 === "1") 	sites[4][1]++;
@@ -409,19 +412,22 @@ function buildArrays () {
 
 		};
 		
-		for (var i = 0; i < sites.length; i++) {
+		// for (var i = 0; i < sites.length; i++) {
 			
-			sitesTotals.push(new Array);
+		// 	sitesTotals.push(new Array);
 
-			for (var l = 0; l < sites[i].length; l++) {
-				var perCent = (sites[i][l] / totalResponses[i]) * 100;
-				sitesTotals[i].push(perCent);
-			};
+		// 	for (var l = 0; l < sites[i].length; l++) {
+		// 		var perCent = (sites[i][l] / totalResponses[i]) * 100;
+		// 		sitesTotals[i].push(perCent);
+		// 	};
 
-			sitesTotals[i].push(totalResponses[i]);
-		};
+		// 	sitesTotals[i].push(totalResponses[i]);
+		// };
+
+		console.log(totalResponses);
+		console.log(blapResponses);
 		
-		console.log(
+		/*console.log(
 			'<table>\n' +
 			'<thead>' +
 			'<tr><th>Site</th>' +
@@ -561,7 +567,7 @@ function buildArrays () {
 			'<td>' + round(sitesTotals[8][17]) + '</td></tr>\n' +
 			'</tbody>\n' +
 			'</table>'
-		);
+		);*/
 
 
 		/*console.log(

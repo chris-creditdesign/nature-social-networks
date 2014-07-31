@@ -4,6 +4,7 @@ function buildObjects () {
 
 	d3.csv("data/raw-unredacted-data-cleaned.csv", function(data) {
 
+		var blapResponses = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 		var sites = {
 
@@ -399,6 +400,9 @@ function buildObjects () {
 			}
 
 			if (data[i].selectedSites_5 === "1") {
+
+				blapResponses[4] = blapResponses[4] + 1;
+
 				if (data[i].q10_1_5 === "1") 	sites.selectedSites_5.notProfessionally++;
 				if (data[i].q10_2_5 === "1") 	sites.selectedSites_5.curiosity++;
 				if (data[i].q10_3_5 === "1") 	sites.selectedSites_5.contact++;
@@ -661,10 +665,10 @@ function buildObjects () {
 
 
 		};
-		console.log(sites);
+		// console.log(sites);
+		console.log(blapResponses);
 
-
-		console.log(
+		/*console.log(
 			'<table>\n' +
 
 			'<thead>' +
@@ -996,7 +1000,7 @@ function buildObjects () {
 			'<td>' + sites.selectedSites_17.metrics + '</td></tr>\n' +
 			'</tbody>\n' +
 			'</table>'
-		);
+		);*/
 		
 	});
 

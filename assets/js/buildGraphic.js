@@ -33,13 +33,13 @@ function buildGraphic(dataSet, allSites, margin, width, height, radiusScale, low
 			.attr('opacity',lowOpacityLevel);
 	}
 
-	/*for (var i = 0; i < dataSet.length; i++) {
+	for (var i = 0; i < dataSet.length; i++) {
 		var myArray = new Array;
 		myArray.site = allSites[i]; 
 		myArray.value = dataSet[i][0];
 
 		question1.push(myArray);
-	};*/
+	};
 
 	// console.log(question1);
 

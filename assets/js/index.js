@@ -47,8 +47,8 @@
 			/*	Load D3 */
 			/*	All of the D3/svg code is contained within the call back function */
 			/*	Loading D3 into ie6-8 seems to cause a runtime error */
-			// $.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
-			$.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			// $.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 				// buildObjects(); 
 				// buildArrays();
 		
@@ -59,8 +59,8 @@
 
 
 				$.ajax({
-					// url: "data/table.html",
-					url: "https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701",
+					url: "data/table.html",
+					// url: "https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701",
 					dataType: 'text',
 					success: function (data) {
 
