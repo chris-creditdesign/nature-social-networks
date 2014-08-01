@@ -43,8 +43,8 @@
 			/*	Load D3 */
 			/*	All of the D3/svg code is contained within the call back function */
 			/*	because loading D3 into ie6-8 seems to cause a runtime error */
-			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
-			// $.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			// $.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			$.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 		
 				/* Scale for pie radius */
 				var radiusScale = d3.scale.linear()
@@ -54,22 +54,30 @@
 
 				$.ajax({
 					url: "data/table.html",
-					// url: "https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701",
-					dataType: 'text',
+					url: "https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701",
+					// dataType: 'text',
 					success: function (data) {
 
 						// Store each row of the table in a var
 						tableRows = $(data).find("tbody tr");
+
+						var rowLength = tableRows.eq(0).find('td').length - 1;
 						
 						for (var i = 0; i < tableRows.length; i++) {
 							
 							dataSet.push(new Array);
 
-							for (var p = 1; p < (tableRows.eq(i).find('td').length -1); p++) {
+							for (var p = 1; p < (rowLength); p++) {
 								dataSet[i].push(tableRows.eq(i).find('td').eq(p).text());
 							};
 
-							allSites.push(tableRows.eq(i).find('td').eq(0).text())
+							var thisSite = new Object;
+
+							thisSite.site = tableRows.eq(i).find('td').eq(0).text();
+							thisSite.total = tableRows.eq(i).find('td').eq(rowLength).text();
+
+							allSites.push(thisSite);
+
 						};
 
 						headerRows = $(data).find("thead tr").find('th');
@@ -83,13 +91,12 @@
 
 						buildSVG(margin, width, height);
 						buildCheckboxes(allSites, colour, strokeColour);
-						buildGraphic(dataSet, allSites, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration);
+						buildGraphic(dataSet, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration);
 						buildScales(margin, width, height, radiusScale, scaleLines, strokeColour);
 						buildLines(margin, width, height, radiusScale, scaleLines, dataSet[0].length, strokeColour, baseAngle);
 						// buildList(options);
 						buildLabels(margin, width, height, radiusScale, scaleLines, options, baseRad);
 						buildTicks(margin, width, height, radiusScale, scaleLines);
-						// fadeOutArcs(lowOpacityLevel);
 					}
 
 

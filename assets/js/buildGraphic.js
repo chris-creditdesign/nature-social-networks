@@ -1,8 +1,5 @@
-function buildGraphic(dataSet, allSites, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration) {
-	
-	// var question1 = [];
-
-		
+function buildGraphic(dataSet, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration) {
+			
 	var myArc = d3.svg.arc();
 		myArc.innerRadius(0);
 		myArc.outerRadius(function (d) { return radiusScale(d) } );
@@ -38,48 +35,14 @@ function buildGraphic(dataSet, allSites, margin, width, height, radiusScale, col
 
 	}
 
-	
-
 	jQuery('#networkSelect').change(
 		function () {
-			var item = jQuery("input[type='radio']:checked");
+			var item = jQuery(".outerwrapper .chooseNetwork #networkSelect input[type='radio']:checked");
+			var myIndex = jQuery('.outerwrapper .chooseNetwork #networkSelect input').index(item);
 
-			var myIndex = jQuery('input').index(item);
-
-			console.log(myIndex);
 			updateArcs(myIndex);
 		}
 	);
 	
 	buildArcs(0);
-
-	// for (var i = 0; i < question1.length; i++) {
-	// 	buildArcs(i);
-	// };
-
-	// for (var i = 0; i < dataSet[0].length; i++) {
-	// 	question1.push(new Array);
-	// };
-
-	// for (var q = 0; q < dataSet.length; q++) {
-
-	// 	for (var i = 0; i < dataSet[0].length; i++) {
-	// 		var myObject = new Object;
-	// 		myObject.site = allSites[q]; 
-	// 		myObject.value = dataSet[q][i];
-
-	// 		question1[i].push(myObject);
-	// 	};
-	// };
-
-
-	// for (var p = 0; p < question1.length; p++) {
-	// 	question1[p].sort(function(a, b){
-	// 		return b.value-a.value;
-	// 	})
-	// };
-	
-
-
-
 }

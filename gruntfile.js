@@ -87,7 +87,7 @@ module.exports = function(grunt){
 						'assets/concat/script-open.txt',
 						// 'assets/js/index.min.js',
 						'assets/js/buildCheckboxes.js',
-						'assets/js/fadeOutArcs.js',
+						// 'assets/js/fadeOutArcs.js',
 						'assets/js/buildSVG.js',
 						'assets/js/buildTicks.js',
 						'assets/js/buildList.js',
