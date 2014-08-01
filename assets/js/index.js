@@ -16,12 +16,12 @@
 
 		/*  Colours for the bars */
 		var colour = [
-						"#B570A7",
-						"#F29500",
-						"#E85338",
-						"#006DB2",
-						"#96BE17",
-						"#2C3387"
+						"#3CBAC8",
+						"#B9B2D8",
+						"#F68628",
+						"#B9D98B",
+						"#F69890",
+						"#F2653F"
 					];
 		var strokeColour = "#666";
 
