@@ -2,9 +2,7 @@
 		var init = function($)
 		{
 		/*	==================================================================================== */
-		/*	GLOBAL VARIABLES FOR D3 */
-
-
+		/*	GLOBAL VARIABLES FOR D3 components */
 
 		/*	Margin, Width and height */
 
@@ -14,22 +12,20 @@
 		var width = outerWrapperWidth - margin.left - margin.right;
 		var height = (outerWrapperWidth*0.9) - margin.top - margin.bottom;
 		/*	Global variable to control the length of D3 transitons */
-		var duration = 450;
+		var duration = 300;
 
 		/*  Colours for the bars */
 		var colour = [
-						"#00642D",
-						"#95177E",
-						"#F8B436",
-						"#EB6B4B",
-						"#3BAADC",
-						"#96BE17"
+						"#B570A7",
+						"#F29500",
+						"#E85338",
+						"#006DB2",
+						"#96BE17",
+						"#2C3387"
 					];
 		var strokeColour = "#666";
 
 		var scaleLines = [10,20,30,40,50,60,70];	
-
-		var lowOpacityLevel = 0.7;
 
 		var dataSet = [];
 		var options = [];
@@ -46,11 +42,9 @@
 			/*	==================================================================================== */
 			/*	Load D3 */
 			/*	All of the D3/svg code is contained within the call back function */
-			/*	Loading D3 into ie6-8 seems to cause a runtime error */
+			/*	because loading D3 into ie6-8 seems to cause a runtime error */
 			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 			// $.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
-				// buildObjects(); 
-				// buildArrays();
 		
 				/* Scale for pie radius */
 				var radiusScale = d3.scale.linear()
@@ -88,14 +82,14 @@
 						baseAngle = 180 / dataSet[0].length;
 
 						buildSVG(margin, width, height);
-						buildGraphic(dataSet, allSites, margin, width, height, radiusScale, lowOpacityLevel, colour, baseRad, baseAngle);
+						buildCheckboxes(allSites, colour, strokeColour);
+						buildGraphic(dataSet, allSites, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration);
 						buildScales(margin, width, height, radiusScale, scaleLines, strokeColour);
 						buildLines(margin, width, height, radiusScale, scaleLines, dataSet[0].length, strokeColour, baseAngle);
-						buildList(options);
+						// buildList(options);
 						buildLabels(margin, width, height, radiusScale, scaleLines, options, baseRad);
 						buildTicks(margin, width, height, radiusScale, scaleLines);
-						buildCheckboxes(allSites, colour, lowOpacityLevel, strokeColour);
-						fadeOutArcs(lowOpacityLevel);
+						// fadeOutArcs(lowOpacityLevel);
 					}
 
 

@@ -8,17 +8,16 @@ function buildLabels (margin, width, height, radiusScale, scaleLines, options, b
 		.append('svg:text')
 		.attr('class','options')
 		.attr('x', function (d,i) {
-			var xPos = radiusScale(d3.max(scaleLines)*1.1) * Math.cos((baseRad*i) - (baseRad*4.25));
+			var xPos = radiusScale(d3.max(scaleLines)*1.1) * Math.cos((baseRad*i) - (baseRad*3.25));
 			return xPos;
 		})
 		.attr('y', function (d,i) {
-			var yPos = radiusScale(d3.max(scaleLines)*1.1) * Math.sin((baseRad*i) - (baseRad*4.25));
+			var yPos = radiusScale(d3.max(scaleLines)*1.1) * Math.sin((baseRad*i) - (baseRad*3.25));
 			return yPos;
 		})
 		.attr('text-anchor','middle')
-		.attr('font-weight','bold')
 		.attr("dy", ".35em")
 		.text(function (d,i) {
-			return (i+1);
+			return d;
 		});
 }

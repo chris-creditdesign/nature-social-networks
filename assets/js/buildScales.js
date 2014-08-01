@@ -13,5 +13,6 @@ function buildScales (margin, width, height, radiusScale, scaleLines, strokeColo
 			return radiusScale(d);
 		})
 		.attr('fill', 'none')
-		.attr('stroke', strokeColour);
+		.attr('stroke', strokeColour)
+		.attr('stroke-dasharray', '1, 3');
 }

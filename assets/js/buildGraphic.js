@@ -1,9 +1,7 @@
-function buildGraphic(dataSet, allSites, margin, width, height, radiusScale, lowOpacityLevel, colour, baseRad, baseAngle) {
+function buildGraphic(dataSet, allSites, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration) {
 	
-	var question1 = [];
+	// var question1 = [];
 
-	var myGroup = d3.select(".chart").select("svg").append("g")
-		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + "), rotate(" + (baseAngle * -1) +")");
 		
 	var myArc = d3.svg.arc();
 		myArc.innerRadius(0);
@@ -11,57 +9,77 @@ function buildGraphic(dataSet, allSites, margin, width, height, radiusScale, low
 		myArc.startAngle(function (d,i) { return baseRad * i } );
 		myArc.endAngle(function (d,i) { return baseRad * (i + 1) });
 
-	/*var myArcTest = d3.svg.arc();
-		myArc.innerRadius(0);
-		myArc.outerRadius(function (d) { return radiusScale(d) } );
-		myArc.startAngle(function (d,i) { return 0} );
-		myArc.endAngle(function (d,i) { return baseRad });*/
+	var myGroup = d3.select(".chart").select("svg").append("g")
+		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + "), rotate(" + (baseAngle * -1) +")");
 
-
-	function buildArcs (i) {
-		var thisClass = 'arc' + i;
+	function buildArcs (x) {
 	
-		myGroup.selectAll('.' + thisClass)
-		  .data(dataSet[i])
+		myGroup.selectAll("path")
+		  .data(dataSet[x])
 			.enter()
 		  .append("path")
 			.attr('d', myArc)
-			.attr('class', thisClass)
-			.attr('fill', colour[i])
-			.attr('stroke', 'none')
-			.attr('stroke-width', '1')
-			.attr('opacity',lowOpacityLevel);
+			.attr('fill', function () {
+				return colour[x];
+			})
+			.attr('stroke', 'none');
 	}
 
-	for (var i = 0; i < dataSet.length; i++) {
-		var myArray = new Array;
-		myArray.site = allSites[i]; 
-		myArray.value = dataSet[i][0];
+	function updateArcs (x) {
+		
+		myGroup.selectAll("path")
+		  .data(dataSet[x])
+			.transition()
+			.duration(duration)
+			.attr('d', myArc)
+			.attr('fill', function () {
+				return colour[x];
+			});
 
-		question1.push(myArray);
-	};
+	}
 
-	// console.log(question1);
+	
 
-	/*employees.sort(function(a, b){
-		return a.age-b.age
-	})*/
+	jQuery('#networkSelect').change(
+		function () {
+			var item = jQuery("input[type='radio']:checked");
 
-	// console.log(Object.keys(question1)[0]);
+			var myIndex = jQuery('input').index(item);
 
-	/*for (var key in question1) {
-	   var obj = question1[key];
-	   
-	   for (var prop in obj) {
-	      // important check that this is objects own property 
-	      // not from prototype prop inherited
-	      if(obj.hasOwnProperty(prop)){
-	        alert(prop + " = " + obj[prop]);
-	      }
-	   }
-	}*/
+			console.log(myIndex);
+			updateArcs(myIndex);
+		}
+	);
+	
+	buildArcs(0);
 
-	for (var i = 0; i < dataSet.length; i++) {
-		buildArcs(i);
-	};
+	// for (var i = 0; i < question1.length; i++) {
+	// 	buildArcs(i);
+	// };
+
+	// for (var i = 0; i < dataSet[0].length; i++) {
+	// 	question1.push(new Array);
+	// };
+
+	// for (var q = 0; q < dataSet.length; q++) {
+
+	// 	for (var i = 0; i < dataSet[0].length; i++) {
+	// 		var myObject = new Object;
+	// 		myObject.site = allSites[q]; 
+	// 		myObject.value = dataSet[q][i];
+
+	// 		question1[i].push(myObject);
+	// 	};
+	// };
+
+
+	// for (var p = 0; p < question1.length; p++) {
+	// 	question1[p].sort(function(a, b){
+	// 		return b.value-a.value;
+	// 	})
+	// };
+	
+
+
+
 }

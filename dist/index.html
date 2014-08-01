@@ -1,17 +1,17 @@
 <style scoped>
-.status-message{border:1px solid #c00;background:#fac7c7;padding:10px}.outerwrapper{width:100%;min-height:900px;position:relative;border:1px solid #c8c7cf}.outerwrapper h2,.outerwrapper h3,.outerwrapper p{padding:10px 10px 0;margin:0}.outerwrapper .chooseNetwork{text-align:center}.outerwrapper .chooseNetwork ul#networkSelect{padding:0 160px}.outerwrapper .chooseNetwork ul#networkSelect li{display:inline;margin:0 10px}.outerwrapper .chooseNetwork ul#networkSelect span{position:relative;top:4px;height:20px;width:20px}.outerwrapper .chooseNetwork ul#networkSelect input{outline:0!important;opacity:0;filter:alpha(opacity=0);zoom:1;float:left;margin-left:-40px}.outerwrapper .chooseNetwork ul#networkSelect input+label>span>svg>polygon{opacity:0}.outerwrapper .chooseNetwork ul#networkSelect input:checked+label>span>svg>polygon{opacity:1}.outerwrapper .options ol#optionDescriptions{padding-left:40px}.outerwrapper .options ol#optionDescriptions li{list-style-type:decimal}.outerwrapper .chart svg text{font-size:.8em}.outerwrapper .chart svg text.options{font-size:1.2em}
+.status-message{border:1px solid #c00;background:#fac7c7;padding:10px}.outerwrapper{width:100%;min-height:900px;position:relative;border:1px solid #c8c7cf}.outerwrapper h2,.outerwrapper h3,.outerwrapper p{padding:10px 10px 0;margin:0}.outerwrapper .chooseNetwork{text-align:center}.outerwrapper .chooseNetwork ul#networkSelect{padding:0 160px}.outerwrapper .chooseNetwork ul#networkSelect li{display:inline;margin:0 10px}.outerwrapper .chooseNetwork ul#networkSelect span{position:relative;top:4px;height:20px;width:20px}.outerwrapper .chooseNetwork ul#networkSelect input{outline:0!important;opacity:0;filter:alpha(opacity=0);zoom:1;float:left;margin-left:-40px}.outerwrapper .chooseNetwork ul#networkSelect input+label>span>svg>polygon{opacity:0}.outerwrapper .chooseNetwork ul#networkSelect input:checked+label>span>svg>polygon{opacity:1}.outerwrapper .options ol#optionDescriptions{padding-left:40px}.outerwrapper .options ol#optionDescriptions li{list-style-type:decimal}.outerwrapper .chart svg text{font-size:.8em}.outerwrapper .chart svg .Academia.edu{fill:#ff69b4}
 </style>
 <div class="outerwrapper">
 	<div class="chart"></div>
 
-	<div class="chooseNetwork"></div>
+	<form class="chooseNetwork"></form>
 	<div class="options"></div>
 </div>
 
 
 <!--[if gt IE 8]><!-->
 <script type="text/javascript">
-function buildCheckboxes (allSites, colour, lowOpacityLevel, strokeColour) {
+function buildCheckboxes (allSites, colour, strokeColour) {
 	/* Create checkboxes for each site */
 	d3.select(".chooseNetwork")
 		.append("ul")
@@ -21,13 +21,14 @@ function buildCheckboxes (allSites, colour, lowOpacityLevel, strokeColour) {
 	  	.enter()
 		.append("li")
 		.html(function (d, i) {
-			var innerHTML = "<input type='checkbox' id='" + d + "' name='" + d + "' checked><label for='" + d + "'><span><svg height='20' width='20'><circle cx='10' cy='10' r='10' fill='" + colour[i] + "' class='dot" + i + "' opacity='" + lowOpacityLevel + "'></circle><polygon fill='#fff' points='8.163,11.837 6.062,9.737 3.963,11.837 6.062,13.938 8.163,16.037 16.037,8.162 13.938,6.062'/></polygon></svg></span> " + d + "</label>";
+			var checked = (i === 0) ? 'checked':'';
+
+			var innerHTML = "<input type='radio' id='" + d + "' name='selectedSite' " + checked + "><label for='" + d + "'><span><svg height='20' width='20'><circle cx='10' cy='10' r='10' fill='" + colour[i] + "' class='dot" + i + "'></circle><polygon fill='#fff' points='8.163,11.837 6.062,9.737 3.963,11.837 6.062,13.938 8.163,16.037 16.037,8.162 13.938,6.062'/></polygon></svg></span> " + d + "</label>";
 
 			return innerHTML;
 		});
 }
 function fadeOutArcs (lowOpacityLevel) {
-	// body...
 	function fadeOut (x) {
 		d3.select(".chart").select("svg").selectAll(x)
 			.transition()
@@ -44,36 +45,43 @@ function fadeOutArcs (lowOpacityLevel) {
 
 	jQuery('#networkSelect').change(
 		function () {
+			var myValue = jQuery(this).find("input[type='radio']:checked").attr('id');
+
+			console.log(myValue);
+
 			if (jQuery('#Twitter').is(':checked')) {
-				fadeOut('path.arc0');
+				// fadeOut('path.Twitter');
+
 			} else {
-				fadeIn('path.arc0')
+				// fadeIn('path.Twitter')
 			}
-			if (jQuery('#Facebook').is(':checked')) {
-				fadeOut('path.arc1');
-			} else {
-				fadeIn('path.arc1')
-			}
-			if (jQuery('#Academiaedu').is(':checked')) {
-				fadeOut('path.arc2');
-			} else {
-				fadeIn('path.arc2')
-			}
-			if (jQuery('#ResearchGate').is(':checked')) {
-				fadeOut('path.arc3');
-			} else {
-				fadeIn('path.arc3')
-			}
-			if (jQuery('#LinkedIn').is(':checked')) {
-				fadeOut('path.arc4');
-			} else {
-				fadeIn('path.arc4')
-			}
-			if (jQuery('#Mendeley').is(':checked')) {
-				fadeOut('path.arc5');
-			} else {
-				fadeIn('path.arc5')
-			}
+			// if (jQuery('#Facebook').is(':checked')) {
+			// 	fadeOut('path.Facebook');
+			// } else {
+			// 	fadeIn('path.Facebook')
+			// }
+			// if (jQuery('#AcademiaEdu').is(':checked')) {
+			// 	fadeOut('path.AcademiaEdu');
+			// } else {
+			// 	fadeIn('path.AcademiaEdu')
+			// }
+			// if (jQuery('#ResearchGate').is(':checked')) {
+			// 	fadeOut('path.ResearchGate');
+			// } else {
+			// 	fadeIn('path.ResearchGate')
+			// }
+			// if (jQuery('#LinkedIn').is(':checked')) {
+			// 	fadeOut('path.LinkedIn');
+			// } else {
+			// 	fadeIn('path.LinkedIn')
+			// }
+			// if (jQuery('#Mendeley').is(':checked')) {
+			// 	fadeOut('path.Mendeley');
+			// } else {
+			// 	fadeIn('path.Mendeley')
+			// }
+
+
 		}
 	);
 }
@@ -121,18 +129,17 @@ function buildLabels (margin, width, height, radiusScale, scaleLines, options, b
 		.append('svg:text')
 		.attr('class','options')
 		.attr('x', function (d,i) {
-			var xPos = radiusScale(d3.max(scaleLines)*1.1) * Math.cos((baseRad*i) - (baseRad*4.25));
+			var xPos = radiusScale(d3.max(scaleLines)*1.1) * Math.cos((baseRad*i) - (baseRad*3.25));
 			return xPos;
 		})
 		.attr('y', function (d,i) {
-			var yPos = radiusScale(d3.max(scaleLines)*1.1) * Math.sin((baseRad*i) - (baseRad*4.25));
+			var yPos = radiusScale(d3.max(scaleLines)*1.1) * Math.sin((baseRad*i) - (baseRad*3.25));
 			return yPos;
 		})
 		.attr('text-anchor','middle')
-		.attr('font-weight','bold')
 		.attr("dy", ".35em")
 		.text(function (d,i) {
-			return (i+1);
+			return d;
 		});
 }
 function buildLines (margin, width, height, radiusScale, scaleLines, dataSetLength, strokeColour, baseAngle) {
@@ -146,7 +153,7 @@ function buildLines (margin, width, height, radiusScale, scaleLines, dataSetLeng
 			.attr('x2', '0')
 			.attr('y2', -radiusScale(scaleLines[scaleLines.length-1]))
 			.attr('stroke', strokeColour)
-			.attr('stroke-width','1px')
+			.attr('stroke-width','0.5px')
 			.attr('fill','none')
 			.attr('transform','rotate(' +  (baseAngle + ((baseAngle*2) * i)) + ')');
 	};
@@ -166,14 +173,13 @@ function buildScales (margin, width, height, radiusScale, scaleLines, strokeColo
 			return radiusScale(d);
 		})
 		.attr('fill', 'none')
-		.attr('stroke', strokeColour);
+		.attr('stroke', strokeColour)
+		.attr('stroke-dasharray', '1, 3');
 }
-function buildGraphic(dataSet, allSites, margin, width, height, radiusScale, lowOpacityLevel, colour, baseRad, baseAngle) {
+function buildGraphic(dataSet, allSites, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration) {
 	
-	var question1 = [];
+	// var question1 = [];
 
-	var myGroup = d3.select(".chart").select("svg").append("g")
-		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + "), rotate(" + (baseAngle * -1) +")");
 		
 	var myArc = d3.svg.arc();
 		myArc.innerRadius(0);
@@ -181,67 +187,85 @@ function buildGraphic(dataSet, allSites, margin, width, height, radiusScale, low
 		myArc.startAngle(function (d,i) { return baseRad * i } );
 		myArc.endAngle(function (d,i) { return baseRad * (i + 1) });
 
-	/*var myArcTest = d3.svg.arc();
-		myArc.innerRadius(0);
-		myArc.outerRadius(function (d) { return radiusScale(d) } );
-		myArc.startAngle(function (d,i) { return 0} );
-		myArc.endAngle(function (d,i) { return baseRad });*/
+	var myGroup = d3.select(".chart").select("svg").append("g")
+		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + "), rotate(" + (baseAngle * -1) +")");
 
-
-	function buildArcs (i) {
-		var thisClass = 'arc' + i;
+	function buildArcs (x) {
 	
-		myGroup.selectAll('.' + thisClass)
-		  .data(dataSet[i])
+		myGroup.selectAll("path")
+		  .data(dataSet[x])
 			.enter()
 		  .append("path")
 			.attr('d', myArc)
-			.attr('class', thisClass)
-			.attr('fill', colour[i])
-			.attr('stroke', 'none')
-			.attr('stroke-width', '1')
-			.attr('opacity',lowOpacityLevel);
+			.attr('fill', function () {
+				return colour[x];
+			})
+			.attr('stroke', 'none');
 	}
 
-	for (var i = 0; i < dataSet.length; i++) {
-		var myArray = new Array;
-		myArray.site = allSites[i]; 
-		myArray.value = dataSet[i][0];
+	function updateArcs (x) {
+		
+		myGroup.selectAll("path")
+		  .data(dataSet[x])
+			.transition()
+			.duration(duration)
+			.attr('d', myArc)
+			.attr('fill', function () {
+				return colour[x];
+			});
 
-		question1.push(myArray);
-	};
+	}
 
-	// console.log(question1);
+	
 
-	/*employees.sort(function(a, b){
-		return a.age-b.age
-	})*/
+	jQuery('#networkSelect').change(
+		function () {
+			var item = jQuery("input[type='radio']:checked");
 
-	// console.log(Object.keys(question1)[0]);
+			var myIndex = jQuery('input').index(item);
 
-	/*for (var key in question1) {
-	   var obj = question1[key];
-	   
-	   for (var prop in obj) {
-	      // important check that this is objects own property 
-	      // not from prototype prop inherited
-	      if(obj.hasOwnProperty(prop)){
-	        alert(prop + " = " + obj[prop]);
-	      }
-	   }
-	}*/
+			console.log(myIndex);
+			updateArcs(myIndex);
+		}
+	);
+	
+	buildArcs(0);
 
-	for (var i = 0; i < dataSet.length; i++) {
-		buildArcs(i);
-	};
+	// for (var i = 0; i < question1.length; i++) {
+	// 	buildArcs(i);
+	// };
+
+	// for (var i = 0; i < dataSet[0].length; i++) {
+	// 	question1.push(new Array);
+	// };
+
+	// for (var q = 0; q < dataSet.length; q++) {
+
+	// 	for (var i = 0; i < dataSet[0].length; i++) {
+	// 		var myObject = new Object;
+	// 		myObject.site = allSites[q]; 
+	// 		myObject.value = dataSet[q][i];
+
+	// 		question1[i].push(myObject);
+	// 	};
+	// };
+
+
+	// for (var p = 0; p < question1.length; p++) {
+	// 	question1[p].sort(function(a, b){
+	// 		return b.value-a.value;
+	// 	})
+	// };
+	
+
+
+
 }
 (function() {
 		var init = function($)
 		{
 		/*	==================================================================================== */
-		/*	GLOBAL VARIABLES FOR D3 */
-
-
+		/*	GLOBAL VARIABLES FOR D3 components */
 
 		/*	Margin, Width and height */
 
@@ -251,22 +275,20 @@ function buildGraphic(dataSet, allSites, margin, width, height, radiusScale, low
 		var width = outerWrapperWidth - margin.left - margin.right;
 		var height = (outerWrapperWidth*0.9) - margin.top - margin.bottom;
 		/*	Global variable to control the length of D3 transitons */
-		var duration = 450;
+		var duration = 300;
 
 		/*  Colours for the bars */
 		var colour = [
-						"#00642D",
-						"#95177E",
-						"#F8B436",
-						"#EB6B4B",
-						"#3BAADC",
-						"#96BE17"
+						"#B570A7",
+						"#F29500",
+						"#E85338",
+						"#006DB2",
+						"#96BE17",
+						"#2C3387"
 					];
 		var strokeColour = "#666";
 
 		var scaleLines = [10,20,30,40,50,60,70];	
-
-		var lowOpacityLevel = 0.7;
 
 		var dataSet = [];
 		var options = [];
@@ -283,11 +305,9 @@ function buildGraphic(dataSet, allSites, margin, width, height, radiusScale, low
 			/*	==================================================================================== */
 			/*	Load D3 */
 			/*	All of the D3/svg code is contained within the call back function */
-			/*	Loading D3 into ie6-8 seems to cause a runtime error */
+			/*	because loading D3 into ie6-8 seems to cause a runtime error */
 			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 			// $.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
-				// buildObjects(); 
-				// buildArrays();
 		
 				/* Scale for pie radius */
 				var radiusScale = d3.scale.linear()
@@ -325,14 +345,14 @@ function buildGraphic(dataSet, allSites, margin, width, height, radiusScale, low
 						baseAngle = 180 / dataSet[0].length;
 
 						buildSVG(margin, width, height);
-						buildGraphic(dataSet, allSites, margin, width, height, radiusScale, lowOpacityLevel, colour, baseRad, baseAngle);
+						buildCheckboxes(allSites, colour, strokeColour);
+						buildGraphic(dataSet, allSites, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration);
 						buildScales(margin, width, height, radiusScale, scaleLines, strokeColour);
 						buildLines(margin, width, height, radiusScale, scaleLines, dataSet[0].length, strokeColour, baseAngle);
-						buildList(options);
+						// buildList(options);
 						buildLabels(margin, width, height, radiusScale, scaleLines, options, baseRad);
 						buildTicks(margin, width, height, radiusScale, scaleLines);
-						buildCheckboxes(allSites, colour, lowOpacityLevel, strokeColour);
-						fadeOutArcs(lowOpacityLevel);
+						// fadeOutArcs(lowOpacityLevel);
 					}
 
 
