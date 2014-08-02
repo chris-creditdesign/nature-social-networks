@@ -56,12 +56,15 @@ $colour-5: #EB6B4B;
 	}
 
 	.chooseNetwork {
-       -webkit-column-count: 2;
-       -moz-column-count: 2;
-       column-count: 2;
+		@media (min-width: 630px) {
+			-webkit-column-count: 2;
+			-moz-column-count: 2;
+			column-count: 2;
+		}
+		
 		ul#networkSelect {
 				overflow: visible;
-				padding-left: 0px;
+				padding-left: 10px;
 				li {
 					list-style: none;
 					margin: 0px 10px;
