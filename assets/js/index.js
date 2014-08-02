@@ -8,9 +8,28 @@
 
 		var outerWrapperWidth = $('.section').width();
 
+		var smallLayout = false;
+
+		if (outerWrapperWidth < 500) {
+			smallLayout = true;
+		};
+
 		var margin = {top: 0, right: 100, bottom: 0, left: 100};
+
+		if (smallLayout) {
+			margin.right = 50;
+			margin.left = 50;
+		};
+
 		var width = outerWrapperWidth - margin.left - margin.right;
-		var height = (outerWrapperWidth*0.9) - margin.top - margin.bottom;
+		var height;
+
+		if (smallLayout) {
+			height = outerWrapperWidth - margin.top - margin.bottom;
+		} else {
+			height = (outerWrapperWidth*0.9) - margin.top - margin.bottom;
+		}
+
 		/*	Global variable to control the length of D3 transitons */
 		var duration = 300;
 
@@ -94,8 +113,12 @@
 						buildGraphic(dataSet, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration);
 						buildScales(margin, width, height, radiusScale, scaleLines, strokeColour);
 						buildLines(margin, width, height, radiusScale, scaleLines, dataSet[0].length, strokeColour, baseAngle);
-						// buildList(options);
-						buildLabels(margin, width, height, radiusScale, scaleLines, options, baseRad);
+						
+						if (smallLayout) {
+							buildList(options);
+						}
+
+						buildLabels(margin, width, height, smallLayout, radiusScale, scaleLines, options, baseRad);
 						buildTicks(margin, width, height, radiusScale, scaleLines);
 					}
 

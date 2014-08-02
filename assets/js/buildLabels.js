@@ -1,9 +1,8 @@
-function buildLabels (margin, width, height, radiusScale, scaleLines, options, baseRad) {
+function buildLabels (margin, width, height, smallLayout, radiusScale, scaleLines, options, baseRad) {
 
 	/* http://bl.ocks.org/mbostock/7555321 */
 	function wrap(text, width) {
 		text.each(function() {
-			console.log("Hello mum!");
 			var text = d3.select(this),
 				words = text.text().split(/\s+/).reverse(),
 				word,
@@ -36,21 +35,42 @@ function buildLabels (margin, width, height, radiusScale, scaleLines, options, b
 		.enter()
 		.append('svg:text')
 		.attr('x', function (d,i) {
-			var xPos = radiusScale(d3.max(scaleLines)*1.225) * Math.cos((baseRad*i) - (baseRad*3.25));
+			var xPos;
+			if (smallLayout) {
+				xPos = radiusScale(d3.max(scaleLines)*1.2) * Math.cos((baseRad*i) - (baseRad*3.25));
+			} else {
+				xPos = radiusScale(d3.max(scaleLines)*1.225) * Math.cos((baseRad*i) - (baseRad*3.25));				
+			}
 			return xPos;
 		})
 		.attr('y', function (d,i) {
-			var yPos = radiusScale(d3.max(scaleLines)*1.15) * Math.sin((baseRad*i) - (baseRad*3.25));
+			var yPos;
+			if (smallLayout) {
+				yPos = radiusScale(d3.max(scaleLines)*1.2) * Math.sin((baseRad*i) - (baseRad*3.25));
+			} else {
+				yPos = radiusScale(d3.max(scaleLines)*1.15) * Math.sin((baseRad*i) - (baseRad*3.25));				
+			}
 			return yPos;
 		})
 		.attr('text-anchor','middle')
-		.attr("dy", "0em")
-		.text(function (d) {
-			return d;
+		.attr("dy", function () {
+			if (smallLayout) {
+				return "0.35em";
+			} else {
+				return "0em";
+			}
+		})
+		.text(function (d, i) {
+			if (smallLayout) {
+				return i + 1;
+			} else {
+				return d;
+				
+			}
 		});
 	
 	d3.selectAll('.options text')
-	  	.call(wrap, 100);
+		.call(wrap, 100);
 	  
 
 
