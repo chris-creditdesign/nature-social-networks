@@ -71,8 +71,4 @@ function buildLabels (margin, width, height, smallLayout, radiusScale, scaleLine
 	
 	d3.selectAll('.options text')
 		.call(wrap, 100);
-	  
-
-
-
 }
