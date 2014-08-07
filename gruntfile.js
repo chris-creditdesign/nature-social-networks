@@ -47,6 +47,7 @@ module.exports = function(grunt){
 												'assets/js/buildLines.js',
 												'assets/js/buildScales.js',
 												'assets/js/buildGraphic.js',
+												'assets/js/updateGraphic.js',
 												'assets/js/buildDataSet.js',
 												'assets/js/buildComments.js',
 												'assets/js/index.js']
@@ -72,6 +73,7 @@ module.exports = function(grunt){
 						'assets/js/buildLines.js',
 						'assets/js/buildScales.js',
 						'assets/js/buildGraphic.js',
+						'assets/js/updateGraphic.js',
 						'assets/js/buildDataSet.js',
 						'assets/js/buildComments.js',
 						// 'assets/js/buildArrays.js',
@@ -98,6 +100,7 @@ module.exports = function(grunt){
 						'assets/js/buildLines.js',
 						'assets/js/buildScales.js',
 						'assets/js/buildGraphic.js',
+						'assets/js/updateGraphic.js',
 						'assets/js/buildDataSet.js',
 						'assets/js/buildComments.js',
 						'assets/js/index.js',

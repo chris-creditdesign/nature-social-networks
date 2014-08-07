@@ -1,5 +1,4 @@
 function buildDataSet (data) {
-
 	// Store each row of the table in a var
 	var tableRows = jQuery(data).find("tbody tr");
 	var headerRows = jQuery(data).find("thead tr").find('th');
@@ -10,7 +9,6 @@ function buildDataSet (data) {
 		options : [],
 		allSites : []
 	}
-
 	for (var i = 0; i < tableRows.length; i++) {
 		
 		networkDataSet.dataSet.push(new Array);
@@ -26,11 +24,11 @@ function buildDataSet (data) {
 
 		networkDataSet.allSites.push(thisSite);
 
-	};
+	}
 
 	for (var i = 1; i < headerRows.length -1; i++) {
 		networkDataSet.options.push(headerRows.eq(i).text());
-	};
-
+	}
+	
 	return networkDataSet;
 }

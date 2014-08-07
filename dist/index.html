@@ -180,8 +180,8 @@ function buildScales (margin, width, height, radiusScale, scaleLines, strokeColo
 		.attr('stroke', strokeColour)
 		.attr('stroke-dasharray', '1, 3');
 }
-function buildGraphic(dataSet, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration) {
-			
+var buildGraphic = function(dataSet, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration) {
+
 	var myArc = d3.svg.arc();
 		myArc.innerRadius(0);
 		myArc.outerRadius(function (d) { return radiusScale(d) } );
@@ -192,11 +192,11 @@ function buildGraphic(dataSet, margin, width, height, radiusScale, colour, baseR
 		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + "), rotate(" + (baseAngle * -1) +")");
 
 	function buildArcs (x) {
-	
 		myGroup.selectAll("path")
 		  .data(dataSet[x])
 			.enter()
 		  .append("path")
+		  	.attr('class', 'segment')
 			.attr('d', myArc)
 			.attr('fill', function () {
 				return colour[x];
@@ -204,9 +204,8 @@ function buildGraphic(dataSet, margin, width, height, radiusScale, colour, baseR
 			.attr('stroke', 'none');
 	}
 
-	function updateArcs (x) {
-		
-		myGroup.selectAll("path")
+	function updateGraphic (x) {
+		myGroup.selectAll("path.segment")
 		  .data(dataSet[x])
 			.transition()
 			.duration(duration)
@@ -214,22 +213,21 @@ function buildGraphic(dataSet, margin, width, height, radiusScale, colour, baseR
 			.attr('fill', function () {
 				return colour[x];
 			});
-
 	}
 
-	jQuery('#networkSelect').change(
-		function () {
-			var item = jQuery(".outerwrapper .chooseNetwork #networkSelect input[type='radio']:checked");
-			var myIndex = jQuery('.outerwrapper .chooseNetwork #networkSelect input').index(item);
-
-			updateArcs(myIndex);
-		}
-	);
-	
 	buildArcs(0);
-}
-function buildDataSet (data) {
 
+	return {
+		buildArcs: function (dataSet, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration) {
+			return processDate(dataSet, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration);
+		},
+		updateGraphic: function (x) {
+			return updateGraphic(x);
+		}
+	};
+};
+
+function buildDataSet (data) {
 	// Store each row of the table in a var
 	var tableRows = jQuery(data).find("tbody tr");
 	var headerRows = jQuery(data).find("thead tr").find('th');
@@ -240,7 +238,6 @@ function buildDataSet (data) {
 		options : [],
 		allSites : []
 	}
-
 	for (var i = 0; i < tableRows.length; i++) {
 		
 		networkDataSet.dataSet.push(new Array);
@@ -256,12 +253,12 @@ function buildDataSet (data) {
 
 		networkDataSet.allSites.push(thisSite);
 
-	};
+	}
 
 	for (var i = 1; i < headerRows.length -1; i++) {
 		networkDataSet.options.push(headerRows.eq(i).text());
-	};
-
+	}
+	
 	return networkDataSet;
 }
 function buildComments (data) {
@@ -366,11 +363,11 @@ function buildComments (data) {
 
 			/*	==================================================================================== */
 			/*	Load D3 */
-			// $.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
-			$.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			// $.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 
-				// $.when($.ajax("data/table.html"), $.ajax("data/comments.html")).done(function (a1, a2) {
-				$.when($.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701"), $.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18992")).done(function (a1, a2) {
+				$.when($.ajax("data/table.html"), $.ajax("data/comments.html")).done(function (a1, a2) {
+				// $.when($.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701"), $.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18992")).done(function (a1, a2) {
 
 					networkData = buildDataSet(a1[0]);
 					networkComments = buildComments(a2[0]);				
@@ -386,7 +383,7 @@ function buildComments (data) {
 					buildSVG(margin, width, height);
 					buildCheckboxes(networkData.allSites, colour, strokeColour);
 
-					buildGraphic(networkData.dataSet, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration);
+					var myGraphic = buildGraphic(networkData.dataSet, margin, width, height, radiusScale, colour, baseRad, baseAngle, duration);
 					buildScales(margin, width, height, radiusScale, scaleLines, strokeColour);
 					buildLines(margin, width, height, radiusScale, scaleLines, networkData.dataSet[0].length, strokeColour, baseAngle);
 
@@ -396,6 +393,15 @@ function buildComments (data) {
 
 					buildLabels(margin, width, height, smallLayout, radiusScale, scaleLines, networkData.options, baseRad);
 					buildTicks(margin, width, height, radiusScale, scaleLines);
+
+					$('#networkSelect').change(
+						function () {
+							var item = $(".outerwrapper .chooseNetwork #networkSelect input[type='radio']:checked");
+							var myIndex = $('.outerwrapper .chooseNetwork #networkSelect input').index(item);
+
+							myGraphic.updateGraphic(myIndex);
+						}
+					);
 
 				});
 
