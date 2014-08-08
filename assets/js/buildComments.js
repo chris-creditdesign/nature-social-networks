@@ -7,9 +7,9 @@ function buildComments (data) {
 	function addComment (x) {
 		var myArray = [];
 
-		for (var p = 1; p <= (commentLowLength); p++) {
+		for (var p = 0; p <= (commentLowLength); p++) {
 			myArray.push(commentRows.eq(x).find('td').eq(p).text());
-		};
+		}
 
 		return myArray;
 	}
@@ -25,13 +25,13 @@ function buildComments (data) {
 			case 'Facebook':
 				comments[1].push(addComment(i));
 				break;
-			case 'Academia.edu':
+			case 'LinkedIn':
 				comments[2].push(addComment(i));
 				break;
 			case 'ReseachGate':
 				comments[3].push(addComment(i));
 				break;
-			case 'LinkedIn':
+			case 'Academia.edu':
 				comments[4].push(addComment(i));
 				break;
 			case 'Mendeley':
@@ -40,6 +40,6 @@ function buildComments (data) {
 			default:
 				break;
 		}
-	};
+	}
 	return comments;
 }

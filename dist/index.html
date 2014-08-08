@@ -77,8 +77,8 @@
 </style>
 <div class="status-message">
 	<p>The interactive companion to these tables requires a modern browser (e.g. Chrome, Safari, Firefox or Internet Explorer 9+) with javascript enabled.</p>
-	<p><a href="/polopoly/CM/7.18701" polopoly:contentid="7.18701">How do you use this site professionally?</a></p>
-	<p><a href="/polopoly/CM/7.18992" polopoly:contentid="7.18992" >Respondent comments.</a></p>
+	<p><a href="https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701">How do you use this site professionally?</a></p>
+	<p><a href="https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18992" >Respondent comments.</a></p>
 </div>
 
 <div class="outerwrapper">
@@ -130,7 +130,7 @@ function buildTicks (margin, width, height, radiusScale, scaleLines) {
 	  .data(scaleLines)
 		.enter()
 		.append('svg:text')
-		.attr('y', function(d) { return -1 * radiusScale(d) })
+		.attr('y', function(d) { return -1 * radiusScale(d); })
 		.attr("text-anchor", "middle")
 		.attr("dy", ".35em")
 		.text(function (d) {
@@ -244,7 +244,7 @@ function buildLines (margin, width, height, radiusScale, scaleLines, dataSetLeng
 			})
 			.attr('fill','none')
 			.attr('transform','rotate(' +  (baseAngle + ((baseAngle*2) * i)) + ')');
-	};
+	}
 }
 function buildScales (margin, width, height, radiusScale, scaleLines, strokeColour) {
 	
@@ -268,9 +268,9 @@ var buildGraphic = function(dataSet, margin, width, height, radiusScale, colour,
 
 	var myArc = d3.svg.arc();
 		myArc.innerRadius(0);
-		myArc.outerRadius(function (d) { return radiusScale(d) } );
-		myArc.startAngle(function (d,i) { return baseRad * i } );
-		myArc.endAngle(function (d,i) { return baseRad * (i + 1) });
+		myArc.outerRadius(function (d) { return radiusScale(d); } );
+		myArc.startAngle(function (d,i) { return baseRad * i; } );
+		myArc.endAngle(function (d,i) { return baseRad * (i + 1); });
 
 	var myGroup = d3.select(".chart").select("svg").append("g")
 		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + "), rotate(" + (baseAngle * -1) +")");
@@ -319,16 +319,18 @@ function buildDataSet (data) {
 		dataSet : [],
 		options : [],
 		allSites : []
-	}
+	};
 	for (var i = 0; i < tableRows.length; i++) {
 		
-		networkDataSet.dataSet.push(new Array);
+		var myNewArray = [];
+
+		networkDataSet.dataSet.push(myNewArray);
 
 		for (var p = 1; p < (rowLength); p++) {
 			networkDataSet.dataSet[i].push(tableRows.eq(i).find('td').eq(p).text());
-		};
+		}
 
-		var thisSite = new Object;
+		var thisSite = {};
 
 		thisSite.site = tableRows.eq(i).find('td').eq(0).text();
 		thisSite.total = tableRows.eq(i).find('td').eq(rowLength).text();
@@ -337,8 +339,8 @@ function buildDataSet (data) {
 
 	}
 
-	for (var i = 1; i < headerRows.length -1; i++) {
-		networkDataSet.options.push(headerRows.eq(i).text());
+	for (var n = 1; n < headerRows.length -1; n++) {
+		networkDataSet.options.push(headerRows.eq(n).text());
 	}
 	
 	return networkDataSet;
@@ -352,9 +354,9 @@ function buildComments (data) {
 	function addComment (x) {
 		var myArray = [];
 
-		for (var p = 1; p <= (commentLowLength); p++) {
+		for (var p = 0; p <= (commentLowLength); p++) {
 			myArray.push(commentRows.eq(x).find('td').eq(p).text());
-		};
+		}
 
 		return myArray;
 	}
@@ -370,13 +372,13 @@ function buildComments (data) {
 			case 'Facebook':
 				comments[1].push(addComment(i));
 				break;
-			case 'Academia.edu':
+			case 'LinkedIn':
 				comments[2].push(addComment(i));
 				break;
 			case 'ReseachGate':
 				comments[3].push(addComment(i));
 				break;
-			case 'LinkedIn':
+			case 'Academia.edu':
 				comments[4].push(addComment(i));
 				break;
 			case 'Mendeley':
@@ -385,7 +387,7 @@ function buildComments (data) {
 			default:
 				break;
 		}
-	};
+	}
 	return comments;
 }
 
@@ -393,8 +395,10 @@ function updateComment (comment) {
 	var myLength = comment.length;
 	var myPick = Math.floor(Math.random() * myLength);
 	
-	var myComment = comment[myPick][0];
-	var myBio = "Age " + comment[myPick][1] + ", " + comment[myPick][3] + ", " + comment[myPick][2];
+	var myComment = comment[myPick][1];
+	var myBio = comment[myPick][0] + " user, Age " + comment[myPick][2] + ", " + comment[myPick][3] + ", " + comment[myPick][4];
+
+	console.log(comment[0]);
 
 	jQuery(".outerwrapper .networkComments").fadeOut("fast", function () {
 		jQuery(".outerwrapper .networkComments > blockquote.comment").html("&#8220;" + myComment + "&#8221;");
@@ -418,14 +422,14 @@ function updateComment (comment) {
 
 		if (outerWrapperWidth < 500) {
 			smallLayout = true;
-		};
+		}
 
 		var margin = {top: 0, right: 100, bottom: 0, left: 100};
 
 		if (smallLayout) {
 			margin.right = 50;
 			margin.left = 50;
-		};
+		}
 
 		var width = outerWrapperWidth - margin.left - margin.right;
 		var height;
@@ -453,11 +457,11 @@ function updateComment (comment) {
 
 			/*	==================================================================================== */
 			/*	Load D3 */
-			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
-			// $.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			// $.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			$.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 
-				$.when($.ajax("data/table.html"), $.ajax("data/comments.html")).done(function (a1, a2) {
-				// $.when($.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701"), $.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18992")).done(function (a1, a2) {
+				// $.when($.ajax("data/table.html"), $.ajax("data/comments.html")).done(function (a1, a2) {
+				$.when($.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701"), $.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18992")).done(function (a1, a2) {
 
 					networkData = buildDataSet(a1[0]);
 					networkComments = buildComments(a2[0]);				

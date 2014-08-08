@@ -6,7 +6,7 @@ function buildTicks (margin, width, height, radiusScale, scaleLines) {
 	  .data(scaleLines)
 		.enter()
 		.append('svg:text')
-		.attr('y', function(d) { return -1 * radiusScale(d) })
+		.attr('y', function(d) { return -1 * radiusScale(d); })
 		.attr("text-anchor", "middle")
 		.attr("dy", ".35em")
 		.text(function (d) {

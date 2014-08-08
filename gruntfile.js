@@ -37,6 +37,12 @@ module.exports = function(grunt){
 		    }
 		},
 
+		jshint: {
+            files: {
+                src : 'assets/js/*.js'
+			},
+		},
+
 		uglify: {
 			build: {
 				files: {

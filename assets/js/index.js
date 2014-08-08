@@ -14,14 +14,14 @@
 
 		if (outerWrapperWidth < 500) {
 			smallLayout = true;
-		};
+		}
 
 		var margin = {top: 0, right: 100, bottom: 0, left: 100};
 
 		if (smallLayout) {
 			margin.right = 50;
 			margin.left = 50;
-		};
+		}
 
 		var width = outerWrapperWidth - margin.left - margin.right;
 		var height;
@@ -49,11 +49,11 @@
 
 			/*	==================================================================================== */
 			/*	Load D3 */
-			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
-			// $.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			// $.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			$.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 
-				$.when($.ajax("data/table.html"), $.ajax("data/comments.html")).done(function (a1, a2) {
-				// $.when($.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701"), $.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18992")).done(function (a1, a2) {
+				// $.when($.ajax("data/table.html"), $.ajax("data/comments.html")).done(function (a1, a2) {
+				$.when($.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701"), $.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18992")).done(function (a1, a2) {
 
 					networkData = buildDataSet(a1[0]);
 					networkComments = buildComments(a2[0]);				

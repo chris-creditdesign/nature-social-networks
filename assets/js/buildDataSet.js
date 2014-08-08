@@ -7,16 +7,18 @@ function buildDataSet (data) {
 		dataSet : [],
 		options : [],
 		allSites : []
-	}
+	};
 	for (var i = 0; i < tableRows.length; i++) {
 		
-		networkDataSet.dataSet.push(new Array);
+		var myNewArray = [];
+
+		networkDataSet.dataSet.push(myNewArray);
 
 		for (var p = 1; p < (rowLength); p++) {
 			networkDataSet.dataSet[i].push(tableRows.eq(i).find('td').eq(p).text());
-		};
+		}
 
-		var thisSite = new Object;
+		var thisSite = {};
 
 		thisSite.site = tableRows.eq(i).find('td').eq(0).text();
 		thisSite.total = tableRows.eq(i).find('td').eq(rowLength).text();
@@ -25,8 +27,8 @@ function buildDataSet (data) {
 
 	}
 
-	for (var i = 1; i < headerRows.length -1; i++) {
-		networkDataSet.options.push(headerRows.eq(i).text());
+	for (var n = 1; n < headerRows.length -1; n++) {
+		networkDataSet.options.push(headerRows.eq(n).text());
 	}
 	
 	return networkDataSet;

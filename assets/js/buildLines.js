@@ -18,5 +18,5 @@ function buildLines (margin, width, height, radiusScale, scaleLines, dataSetLeng
 			})
 			.attr('fill','none')
 			.attr('transform','rotate(' +  (baseAngle + ((baseAngle*2) * i)) + ')');
-	};
+	}
 }
