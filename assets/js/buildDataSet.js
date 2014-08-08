@@ -1,5 +1,4 @@
 function buildDataSet (data) {
-	// Store each row of the table in a var
 	var tableRows = jQuery(data).find("tbody tr");
 	var headerRows = jQuery(data).find("thead tr").find('th');
 	var rowLength = tableRows.eq(0).find('td').length - 1;

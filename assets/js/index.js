@@ -1,6 +1,10 @@
 (function() {
 		var init = function($)
 		{
+
+		$(".status-message").css({"display":"none"});
+		$(".outerwrapper").css({"display":"block"});
+
 		/*	==================================================================================== */
 		/*	GLOBAL VARIABLES FOR D3 components */
 
@@ -89,7 +93,7 @@
 
 				});
 
-			}); // End of d3js getscript call 
+			}); /* End of d3js getscript call */
 
 		/* End of active code */
 		};

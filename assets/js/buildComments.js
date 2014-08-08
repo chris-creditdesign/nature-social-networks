@@ -2,15 +2,7 @@ function buildComments (data) {
 	var commentRows = jQuery(data).find("tbody tr");
 	var commentLowLength = commentRows.eq(0).find('td').length - 1;
 
-	var comments = [
-		[],
-		[],
-		[],
-		[],
-		[],
-		[]
-	]
-
+	var comments = [[], [], [], [], [], [] ];
 
 	function addComment (x) {
 		var myArray = [];

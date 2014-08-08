@@ -28,6 +28,9 @@ module.exports = function(grunt){
 
 		sass: {
 		    build: {
+				options: {                       // Target options
+					style: 'expanded'
+				},
 		        files: {
 		            'assets/css/index.css': 'assets/sass/index.scss'
 		        }
@@ -141,6 +144,6 @@ module.exports = function(grunt){
 
     grunt.registerTask('default', ['watch']);
     // use build css for the final dist css
-    grunt.registerTask('buildcss',  ['sass', 'cssc', 'cssmin']);
+    grunt.registerTask('buildcss',  ['sass']);
 
 };

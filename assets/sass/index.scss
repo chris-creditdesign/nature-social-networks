@@ -42,9 +42,11 @@ $colour-5: #EB6B4B;
 	border: 1px solid #c00;
 	background: #fac7c7;
 	padding: 10px;
+	font-style: italic;
 }
 
 .outerwrapper {
+	display: none;
 	width: 100%;
 	min-height: 900px;
 	position: relative;
@@ -108,15 +110,9 @@ $colour-5: #EB6B4B;
 
 	.chart {
 		svg {
-			line {
-				// shape-rendering: crispEdges;
-			}
 			text {
 				font-size: 0.8em;
 				fill: #444;
-			}
-			.Academia.edu {
-				fill: hotpink;
 			}
 		}
 	}
@@ -132,6 +128,4 @@ $colour-5: #EB6B4B;
 			color: #999;
 		}
 	}
-
-} // outerwrapper
-
+}
