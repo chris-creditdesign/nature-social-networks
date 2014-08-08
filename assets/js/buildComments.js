@@ -28,7 +28,7 @@ function buildComments (data) {
 			case 'LinkedIn':
 				comments[2].push(addComment(i));
 				break;
-			case 'ReseachGate':
+			case 'ResearchGate':
 				comments[3].push(addComment(i));
 				break;
 			case 'Academia.edu':
