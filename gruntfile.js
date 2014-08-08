@@ -47,9 +47,9 @@ module.exports = function(grunt){
 												'assets/js/buildLines.js',
 												'assets/js/buildScales.js',
 												'assets/js/buildGraphic.js',
-												'assets/js/updateGraphic.js',
 												'assets/js/buildDataSet.js',
 												'assets/js/buildComments.js',
+												'assets/js/updateComment.js',
 												'assets/js/index.js']
 				}
 			}
@@ -73,11 +73,9 @@ module.exports = function(grunt){
 						'assets/js/buildLines.js',
 						'assets/js/buildScales.js',
 						'assets/js/buildGraphic.js',
-						'assets/js/updateGraphic.js',
 						'assets/js/buildDataSet.js',
 						'assets/js/buildComments.js',
-						// 'assets/js/buildArrays.js',
-						// 'assets/js/buildObjects.js',
+						'assets/js/updateComment.js',
 						'assets/js/index.js',
 						'assets/concat/script-close.txt',
 						'assets/polopoly-footer.html'
@@ -100,9 +98,9 @@ module.exports = function(grunt){
 						'assets/js/buildLines.js',
 						'assets/js/buildScales.js',
 						'assets/js/buildGraphic.js',
-						'assets/js/updateGraphic.js',
 						'assets/js/buildDataSet.js',
 						'assets/js/buildComments.js',
+						'assets/js/updateComment.js',
 						'assets/js/index.js',
 						'assets/concat/script-close.txt',
 						],

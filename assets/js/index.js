@@ -70,11 +70,12 @@
 					buildLines(margin, width, height, radiusScale, scaleLines, networkData.dataSet[0].length, strokeColour, baseAngle);
 
 					if (smallLayout) {
-						buildList(options);
+						buildList(networkData.options);
 					}
 
 					buildLabels(margin, width, height, smallLayout, radiusScale, scaleLines, networkData.options, baseRad);
 					buildTicks(margin, width, height, radiusScale, scaleLines);
+					updateComment(networkComments[0]);
 
 					$('#networkSelect').change(
 						function () {
@@ -82,6 +83,7 @@
 							var myIndex = $('.outerwrapper .chooseNetwork #networkSelect input').index(item);
 
 							myGraphic.updateGraphic(myIndex);
+							updateComment(networkComments[myIndex]);
 						}
 					);
 
@@ -91,7 +93,6 @@
 
 		/* End of active code */
 		};
-
 
 	setTimeout(function()
 	{

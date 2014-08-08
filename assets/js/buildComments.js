@@ -2,20 +2,20 @@ function buildComments (data) {
 	var commentRows = jQuery(data).find("tbody tr");
 	var commentLowLength = commentRows.eq(0).find('td').length - 1;
 
-	var comments = {
-		twitterComments : [],
-		facebookComments : [],
-		academiaeduComments : [],
-		researchgateComments : [],
-		linkedinComments : [],
-		mendeleyComments : []
-	}
+	var comments = [
+		[],
+		[],
+		[],
+		[],
+		[],
+		[]
+	]
 
 
 	function addComment (x) {
 		var myArray = [];
 
-		for (var p = 1; p < (commentLowLength); p++) {
+		for (var p = 1; p <= (commentLowLength); p++) {
 			myArray.push(commentRows.eq(x).find('td').eq(p).text());
 		};
 
@@ -28,27 +28,26 @@ function buildComments (data) {
 
 		switch (thisSite) {
 			case 'Twitter':
-				comments.twitterComments.push(addComment(i));
+				comments[0].push(addComment(i));
 				break;
 			case 'Facebook':
-				comments.facebookComments.push(addComment(i));
+				comments[1].push(addComment(i));
 				break;
 			case 'Academia.edu':
-				comments.academiaeduComments.push(addComment(i));
+				comments[2].push(addComment(i));
 				break;
 			case 'ReseachGate':
-				comments.researchgateComments.push(addComment(i));
+				comments[3].push(addComment(i));
 				break;
 			case 'LinkedIn':
-				comments.linkedinComments.push(addComment(i));
+				comments[4].push(addComment(i));
 				break;
 			case 'Mendeley':
-				comments.mendeleyComments.push(addComment(i));
+				comments[5].push(addComment(i));
 				break;
 			default:
 				break;
 		}
 	};
-
 	return comments;
 }

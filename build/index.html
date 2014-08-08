@@ -48,7 +48,7 @@
 
 
 <style scoped>
-.status-message{border:1px solid #c00;background:#fac7c7;padding:10px}.outerwrapper{width:100%;min-height:900px;position:relative;border:1px solid #c8c7cf}.outerwrapper h2,.outerwrapper h3,.outerwrapper p{padding:10px 10px 0;margin:0}@media (min-width:630px){.outerwrapper .chooseNetwork{-webkit-column-count:2;-moz-column-count:2;column-count:2}}.outerwrapper .chooseNetwork ul#networkSelect{overflow:visible;padding-left:10px}.outerwrapper .chooseNetwork ul#networkSelect li{list-style:none;margin:0 10px}.outerwrapper .chooseNetwork ul#networkSelect span{position:relative;top:4px;height:20px;width:20px}.outerwrapper .chooseNetwork ul#networkSelect input{outline:0!important;opacity:0;filter:alpha(opacity=0);zoom:1;float:left;margin-left:-40px}.outerwrapper .chooseNetwork ul#networkSelect input+label>span>svg>polygon{opacity:0}.outerwrapper .chooseNetwork ul#networkSelect input:checked+label>span>svg>polygon{opacity:1}.outerwrapper .options ol#optionDescriptions{padding-left:40px}.outerwrapper .options ol#optionDescriptions li{list-style-type:decimal}.outerwrapper .chart svg text{font-size:.8em;fill:#444}.outerwrapper .chart svg .Academia.edu{fill:#ff69b4}
+.status-message{border:1px solid #c00;background:#fac7c7;padding:10px}.outerwrapper{width:100%;min-height:900px;position:relative;border:1px solid #c8c7cf}.outerwrapper h2,.outerwrapper h3,.outerwrapper p{padding:10px 10px 0;margin:0}@media (min-width:630px){.outerwrapper .chooseNetwork{-webkit-column-count:2;-moz-column-count:2;column-count:2}}.outerwrapper .chooseNetwork ul#networkSelect{overflow:visible;padding-left:10px}.outerwrapper .chooseNetwork ul#networkSelect li{list-style:none;margin:0 10px}.outerwrapper .chooseNetwork ul#networkSelect span{position:relative;top:4px;height:20px;width:20px}.outerwrapper .chooseNetwork ul#networkSelect input{outline:0!important;opacity:0;filter:alpha(opacity=0);zoom:1;float:left;margin-left:-40px}.outerwrapper .chooseNetwork ul#networkSelect input+label>span>svg>polygon{opacity:0}.outerwrapper .chooseNetwork ul#networkSelect input:checked+label>span>svg>polygon{opacity:1}.outerwrapper .options ol#optionDescriptions{padding-left:40px}.outerwrapper .options ol#optionDescriptions li{list-style-type:decimal}.outerwrapper .chart svg text{font-size:.8em;fill:#444}.outerwrapper .chart svg .Academia.edu{fill:#ff69b4}.outerwrapper .networkComments{margin:0 20px 20px}.outerwrapper .networkComments .comment{font-style:italic}.outerwrapper .networkComments .bio{text-transform:uppercase;font-weight:700;color:#999}
 </style>
 <div class="outerwrapper">
 	<h2>Interactive: Why scholars use social media</h2>
@@ -58,6 +58,10 @@
 
 	<form class="chooseNetwork"></form>
 	<div class="options"></div>
+	<div class="networkComments">
+		<blockquote class="comment"></blockquote>
+		<cite class="bio"></cite>
+	</div>
 </div>
 
 
@@ -333,7 +337,6 @@ var buildGraphic = function(dataSet, margin, width, height, radiusScale, colour,
 		}
 	};
 };
-
 function buildDataSet (data) {
 	// Store each row of the table in a var
 	var tableRows = jQuery(data).find("tbody tr");
@@ -372,20 +375,20 @@ function buildComments (data) {
 	var commentRows = jQuery(data).find("tbody tr");
 	var commentLowLength = commentRows.eq(0).find('td').length - 1;
 
-	var comments = {
-		twitterComments : [],
-		facebookComments : [],
-		academiaeduComments : [],
-		researchgateComments : [],
-		linkedinComments : [],
-		mendeleyComments : []
-	}
+	var comments = [
+		[],
+		[],
+		[],
+		[],
+		[],
+		[]
+	]
 
 
 	function addComment (x) {
 		var myArray = [];
 
-		for (var p = 1; p < (commentLowLength); p++) {
+		for (var p = 1; p <= (commentLowLength); p++) {
 			myArray.push(commentRows.eq(x).find('td').eq(p).text());
 		};
 
@@ -398,31 +401,43 @@ function buildComments (data) {
 
 		switch (thisSite) {
 			case 'Twitter':
-				comments.twitterComments.push(addComment(i));
+				comments[0].push(addComment(i));
 				break;
 			case 'Facebook':
-				comments.facebookComments.push(addComment(i));
+				comments[1].push(addComment(i));
 				break;
 			case 'Academia.edu':
-				comments.academiaeduComments.push(addComment(i));
+				comments[2].push(addComment(i));
 				break;
 			case 'ReseachGate':
-				comments.researchgateComments.push(addComment(i));
+				comments[3].push(addComment(i));
 				break;
 			case 'LinkedIn':
-				comments.linkedinComments.push(addComment(i));
+				comments[4].push(addComment(i));
 				break;
 			case 'Mendeley':
-				comments.mendeleyComments.push(addComment(i));
+				comments[5].push(addComment(i));
 				break;
 			default:
 				break;
 		}
 	};
-
 	return comments;
 }
 
+function updateComment (comment) {
+	var myLength = comment.length;
+	var myPick = Math.floor(Math.random() * myLength);
+	
+	var myComment = comment[myPick][0];
+	var myBio = "Age " + comment[myPick][1] + ", " + comment[myPick][3] + ", " + comment[myPick][2];
+
+	jQuery(".outerwrapper .networkComments").fadeOut("fast", function () {
+		jQuery(".outerwrapper .networkComments > blockquote.comment").html("&#8220;" + myComment + "&#8221;");
+		jQuery(".outerwrapper .networkComments > cite.bio").html(myBio);	
+	});
+	jQuery(".outerwrapper .networkComments").fadeIn();
+}
 (function() {
 		var init = function($)
 		{
@@ -495,11 +510,12 @@ function buildComments (data) {
 					buildLines(margin, width, height, radiusScale, scaleLines, networkData.dataSet[0].length, strokeColour, baseAngle);
 
 					if (smallLayout) {
-						buildList(options);
+						buildList(networkData.options);
 					}
 
 					buildLabels(margin, width, height, smallLayout, radiusScale, scaleLines, networkData.options, baseRad);
 					buildTicks(margin, width, height, radiusScale, scaleLines);
+					updateComment(networkComments[0]);
 
 					$('#networkSelect').change(
 						function () {
@@ -507,6 +523,7 @@ function buildComments (data) {
 							var myIndex = $('.outerwrapper .chooseNetwork #networkSelect input').index(item);
 
 							myGraphic.updateGraphic(myIndex);
+							updateComment(networkComments[myIndex]);
 						}
 					);
 
@@ -516,7 +533,6 @@ function buildComments (data) {
 
 		/* End of active code */
 		};
-
 
 	setTimeout(function()
 	{
