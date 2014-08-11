@@ -44,8 +44,7 @@ $colour-5: #EB6B4B;
 	padding: 10px;
 	font-style: italic;
 }
-
-.outerwrapper {
+.outer-wrapper {
 	display: none;
 	width: 100%;
 	min-height: 900px;
@@ -62,75 +61,73 @@ $colour-5: #EB6B4B;
 		margin: 0px 20px;
 	}
 
-	.chooseNetwork {
+	.choose-network {
 		@media (min-width: 630px) {
 			-webkit-column-count: 2;
 			-moz-column-count: 2;
 			column-count: 2;
 		}
+	}
 		
-		ul#networkSelect {
-				overflow: visible;
-				padding-left: 10px;
-				li {
-					list-style: none;
-					margin: 0px 10px;
+	ul {
+			overflow: visible;
+			padding-left: 10px;
+			li {
+				list-style: none;
+				margin: 0px 10px;
+			}
+
+			span {
+				position: relative;
+				top: 4px;
+				height: 20px;
+				width: 20px;
+			} // span
+
+			input {
+				outline: none !important;
+				opacity: 0;
+				filter: alpha(opacity=0);
+				zoom: 1;
+				float: left;
+				margin-left: -40px;  
+
+				& + label>span>svg>polygon {
+					opacity: 0;
 				}
 
-				span {
-					position: relative;
-					top: 4px;
-					height: 20px;
-					width: 20px;
-				} // span
+				&:checked + label>span>svg>polygon {
+					opacity: 1;
+				}
 
-				input {
-					outline: none !important;
-					opacity: 0;
-					filter: alpha(opacity=0);
-					zoom: 1;
-					float: left;
-					margin-left: -40px;  
+			} // input
+		}
 
-					& + label>span>svg>polygon {
-						opacity: 0;
-					}
-
-					&:checked + label>span>svg>polygon {
-						opacity: 1;
-					}
-
-				} // input
-			}
-	}
-
-	.options {
-		ol#optionDescriptions {
-			padding-left: 40px;
-			li {
-				list-style-type: decimal;
-			}
+	ol {
+		padding-left: 40px;
+		li {
+			list-style-type: decimal;
 		}
 	}
 
-	.chart {
-		svg {
-			text {
-				font-size: 0.8em;
-				fill: #444;
-			}
+	svg {
+		text {
+			font-size: 0.8em;
+			fill: #444;
 		}
 	}
 
-	.networkComments {
+	.network-comments {
 		margin: 0px 20px 20px;
-		.comment {
-			font-style: italic;
-		}
-		.bio {
-			text-transform: uppercase;
-			font-weight: bold;
-			color: #999;
-		}
+	}
+
+	.comment {
+		font-style: italic;
+	}
+	
+	.bio {
+		text-transform: uppercase;
+		font-weight: bold;
+		color: #999;
 	}
 }

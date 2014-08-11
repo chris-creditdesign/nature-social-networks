@@ -1,5 +1,5 @@
 function buildLines (margin, width, height, radiusScale, scaleLines, dataSetLength, strokeColour, baseAngle) {
-	var mylines = d3.select(".chart").select("svg").append("g")
+	var mylines = d3.select(".outer-wrapper .chart").select("svg").append("g")
 			.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + ")");
 
 	for (var i = 0; i < dataSetLength; i++) {

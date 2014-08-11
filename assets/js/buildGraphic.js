@@ -6,7 +6,7 @@ var buildGraphic = function(dataSet, margin, width, height, radiusScale, colour,
 		myArc.startAngle(function (d,i) { return baseRad * i; } );
 		myArc.endAngle(function (d,i) { return baseRad * (i + 1); });
 
-	var myGroup = d3.select(".chart").select("svg").append("g")
+	var myGroup = d3.select(".outer-wrapper .chart").select("svg").append("g")
 		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + "), rotate(" + (baseAngle * -1) +")");
 
 	function buildArcs (x) {

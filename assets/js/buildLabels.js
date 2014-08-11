@@ -26,7 +26,7 @@ function buildLabels (margin, width, height, smallLayout, radiusScale, scaleLine
 		});
 	}
 
-	var myLabels = d3.select(".chart").select("svg").append("g")
+	var myLabels = d3.select(".outer-wrapper .chart").select("svg").append("g")
 		.attr('class','options')
 		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + ")");
 

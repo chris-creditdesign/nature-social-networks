@@ -1,8 +1,7 @@
 function buildList (options) {
 	/* Create numbered list for options */
-	d3.select(".options")
+	d3.select(".outer-wrapper .options")
 		.append("ol")
-		.attr("id","optionDescriptions")
 		.selectAll('li')
 	  .data(options)
 	  	.enter()

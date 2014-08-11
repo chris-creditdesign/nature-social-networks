@@ -2,7 +2,7 @@ function buildCheckboxes (allSites, colour, strokeColour) {
 	var format = d3.format("0,000");
 
 	/* Create checkboxes for each site */
-	d3.select(".chooseNetwork")
+	d3.select(".outer-wrapper .choose-network")
 		.append("ul")
 		.attr("id","networkSelect")
 		.selectAll('li')

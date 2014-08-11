@@ -55,43 +55,43 @@
   font-style: italic;
 }
 
-.outerwrapper {
+.outer-wrapper {
   display: none;
   width: 100%;
   min-height: 900px;
   position: relative;
   border: 1px solid #c8c7cf;
 }
-.outerwrapper h2, .outerwrapper p {
+.outer-wrapper h2, .outer-wrapper p {
   padding: 10px 10px 0 10px;
   margin: 0;
 }
-.outerwrapper h3 {
+.outer-wrapper h3 {
   padding: 0px;
   margin: 0px 20px;
 }
 @media (min-width: 630px) {
-  .outerwrapper .chooseNetwork {
+  .outer-wrapper .choose-network {
     -webkit-column-count: 2;
     -moz-column-count: 2;
     column-count: 2;
   }
 }
-.outerwrapper .chooseNetwork ul#networkSelect {
+.outer-wrapper ul {
   overflow: visible;
   padding-left: 10px;
 }
-.outerwrapper .chooseNetwork ul#networkSelect li {
+.outer-wrapper ul li {
   list-style: none;
   margin: 0px 10px;
 }
-.outerwrapper .chooseNetwork ul#networkSelect span {
+.outer-wrapper ul span {
   position: relative;
   top: 4px;
   height: 20px;
   width: 20px;
 }
-.outerwrapper .chooseNetwork ul#networkSelect input {
+.outer-wrapper ul input {
   outline: none !important;
   opacity: 0;
   filter: alpha(opacity=0);
@@ -99,29 +99,29 @@
   float: left;
   margin-left: -40px;
 }
-.outerwrapper .chooseNetwork ul#networkSelect input + label > span > svg > polygon {
+.outer-wrapper ul input + label > span > svg > polygon {
   opacity: 0;
 }
-.outerwrapper .chooseNetwork ul#networkSelect input:checked + label > span > svg > polygon {
+.outer-wrapper ul input:checked + label > span > svg > polygon {
   opacity: 1;
 }
-.outerwrapper .options ol#optionDescriptions {
+.outer-wrapper ol {
   padding-left: 40px;
 }
-.outerwrapper .options ol#optionDescriptions li {
+.outer-wrapper ol li {
   list-style-type: decimal;
 }
-.outerwrapper .chart svg text {
+.outer-wrapper svg text {
   font-size: 0.8em;
   fill: #444;
 }
-.outerwrapper .networkComments {
+.outer-wrapper .network-comments {
   margin: 0px 20px 20px;
 }
-.outerwrapper .networkComments .comment {
+.outer-wrapper .comment {
   font-style: italic;
 }
-.outerwrapper .networkComments .bio {
+.outer-wrapper .bio {
   text-transform: uppercase;
   font-weight: bold;
   color: #999;
@@ -134,17 +134,17 @@
 	<p><a href="https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18992" >Respondent comments.</a></p>
 </div>
 
-<div class="outerwrapper">
+<div class="outer-wrapper">
 	<h2>Interactive: Why scholars use social media</h2>
 	<p>In <em>Nature</em>'s survey, a subset of scholars who said they 'regularly visited' social media sites were quizzed in detail about their activities</p>
 
 	<div class="chart"></div>
 
-	<form class="chooseNetwork"></form>
+	<form class="choose-network"></form>
 	<div class="options"></div>
 
-	<h3 class="commentHead">Voices of the survey</h3>
-	<div class="networkComments">
+	<h3 class="comment-head">Voices from the survey</h3>
+	<div class="network-comments">
 		<blockquote class="comment"></blockquote>
 		<cite class="bio"></cite>
 	</div>
@@ -157,7 +157,7 @@ function buildCheckboxes (allSites, colour, strokeColour) {
 	var format = d3.format("0,000");
 
 	/* Create checkboxes for each site */
-	d3.select(".chooseNetwork")
+	d3.select(".outer-wrapper .choose-network")
 		.append("ul")
 		.attr("id","networkSelect")
 		.selectAll('li')
@@ -231,12 +231,12 @@ function fadeOutArcs (lowOpacityLevel) {
 }
 
 function buildSVG(margin, width, height) {
-	d3.select(".chart").append("svg")
+	d3.select(".outer-wrapper .chart").append("svg")
 		.attr("width", width + margin.left + margin.right)
 		.attr("height", height + margin.top + margin.bottom);
 }
 function buildTicks (margin, width, height, radiusScale, scaleLines) {
-	var myTicks = d3.select(".chart").select("svg").append("g")
+	var myTicks = d3.select(".outer-wrapper .chart").select("svg").append("g")
 		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + ")");
 
 	myTicks.selectAll('text')
@@ -252,9 +252,8 @@ function buildTicks (margin, width, height, radiusScale, scaleLines) {
 }
 function buildList (options) {
 	/* Create numbered list for options */
-	d3.select(".options")
+	d3.select(".outer-wrapper .options")
 		.append("ol")
-		.attr("id","optionDescriptions")
 		.selectAll('li')
 	  .data(options)
 	  	.enter()
@@ -291,7 +290,7 @@ function buildLabels (margin, width, height, smallLayout, radiusScale, scaleLine
 		});
 	}
 
-	var myLabels = d3.select(".chart").select("svg").append("g")
+	var myLabels = d3.select(".outer-wrapper .chart").select("svg").append("g")
 		.attr('class','options')
 		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + ")");
 
@@ -338,7 +337,7 @@ function buildLabels (margin, width, height, smallLayout, radiusScale, scaleLine
 		.call(wrap, 100);
 }
 function buildLines (margin, width, height, radiusScale, scaleLines, dataSetLength, strokeColour, baseAngle) {
-	var mylines = d3.select(".chart").select("svg").append("g")
+	var mylines = d3.select(".outer-wrapper .chart").select("svg").append("g")
 			.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + ")");
 
 	for (var i = 0; i < dataSetLength; i++) {
@@ -361,7 +360,7 @@ function buildLines (margin, width, height, radiusScale, scaleLines, dataSetLeng
 }
 function buildScales (margin, width, height, radiusScale, scaleLines, strokeColour) {
 	
-	var myScale = d3.select(".chart").select("svg").append("g")		
+	var myScale = d3.select(".outer-wrapper .chart").select("svg").append("g")		
 		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + ")");
 
 	myScale.selectAll('circle')
@@ -385,7 +384,7 @@ var buildGraphic = function(dataSet, margin, width, height, radiusScale, colour,
 		myArc.startAngle(function (d,i) { return baseRad * i; } );
 		myArc.endAngle(function (d,i) { return baseRad * (i + 1); });
 
-	var myGroup = d3.select(".chart").select("svg").append("g")
+	var myGroup = d3.select(".outer-wrapper .chart").select("svg").append("g")
 		.attr("transform", "translate(" + (width + margin.left + margin.right) / 2 + "," + (height + margin.top + margin.bottom) / 2 + "), rotate(" + (baseAngle * -1) +")");
 
 	function buildArcs (x) {
@@ -510,27 +509,27 @@ function updateComment (comment) {
 	var myComment = comment[myPick][1];
 	var myBio = comment[myPick][0] + " user, Age " + comment[myPick][2] + ", " + comment[myPick][3] + ", " + comment[myPick][4];
 
-	jQuery(".outerwrapper .networkComments").fadeOut("fast", function () {
-		jQuery(".outerwrapper .networkComments > blockquote.comment").html("&#8220;" + myComment + "&#8221;");
-		jQuery(".outerwrapper .networkComments > cite.bio").html(myBio);	
+	jQuery(".outer-wrapper .network-comments").fadeOut("fast", function () {
+		jQuery(".outer-wrapper .network-comments > blockquote.comment").html("&#8220;" + myComment + "&#8221;");
+		jQuery(".outer-wrapper .network-comments > cite.bio").html(myBio);	
 	});
-	jQuery(".outerwrapper .networkComments").fadeIn();
+	jQuery(".outer-wrapper .network-comments").fadeIn();
 }
 (function() {
 		var init = function($)
 		{
 
 		$(".status-message").css({"display":"none"});
-		$(".outerwrapper").css({"display":"block"});
+		$(".outer-wrapper").css({"display":"block"});
 
 		/*	==================================================================================== */
 		/*	GLOBAL VARIABLES FOR D3 components */
 
 		/*	Margin, Width and height */
-		var outerWrapperWidth = $('.section').width();
+		var outerwrapperWidth = $('.section').width();
 		var smallLayout = false;
 
-		if (outerWrapperWidth < 500) {
+		if (outerwrapperWidth < 500) {
 			smallLayout = true;
 		}
 
@@ -541,13 +540,13 @@ function updateComment (comment) {
 			margin.left = 50;
 		}
 
-		var width = outerWrapperWidth - margin.left - margin.right;
+		var width = outerwrapperWidth - margin.left - margin.right;
 		var height;
 
 		if (smallLayout) {
-			height = outerWrapperWidth - margin.top - margin.bottom;
+			height = outerwrapperWidth - margin.top - margin.bottom;
 		} else {
-			height = (outerWrapperWidth*0.9) - margin.top - margin.bottom;
+			height = (outerwrapperWidth*0.9) - margin.top - margin.bottom;
 		}
 
 		/*	Global variable to control the length of D3 transitons */
@@ -567,11 +566,11 @@ function updateComment (comment) {
 
 			/*	==================================================================================== */
 			/*	Load D3 */
-			// $.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
-			$.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			// $.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 
-				// $.when($.ajax("data/table.html"), $.ajax("data/comments.html")).done(function (a1, a2) {
-				$.when($.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701"), $.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18992")).done(function (a1, a2) {
+				$.when($.ajax("data/table.html"), $.ajax("data/comments.html")).done(function (a1, a2) {
+				// $.when($.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701"), $.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18992")).done(function (a1, a2) {
 
 					networkData = buildDataSet(a1[0]);
 					networkComments = buildComments(a2[0]);				
@@ -601,8 +600,8 @@ function updateComment (comment) {
 
 					$('#networkSelect').change(
 						function () {
-							var item = $(".outerwrapper .chooseNetwork #networkSelect input[type='radio']:checked");
-							var myIndex = $('.outerwrapper .chooseNetwork #networkSelect input').index(item);
+							var item = $(".outer-wrapper .choose-network #networkSelect input[type='radio']:checked");
+							var myIndex = $('.outer-wrapper .choose-network #networkSelect input').index(item);
 
 							myGraphic.updateGraphic(myIndex);
 							updateComment(networkComments[myIndex]);
