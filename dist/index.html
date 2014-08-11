@@ -12,6 +12,7 @@
   min-height: 900px;
   position: relative;
   border: 1px solid #c8c7cf;
+  /* Radio */
 }
 .outer-wrapper h2, .outer-wrapper p {
   padding: 10px 10px 0 10px;
@@ -34,33 +35,85 @@
 }
 .outer-wrapper ul li {
   list-style: none;
-  margin: 0px 10px;
-}
-.outer-wrapper ul span {
-  position: relative;
-  top: 4px;
-  height: 20px;
-  width: 20px;
-}
-.outer-wrapper ul input {
-  outline: none !important;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  zoom: 1;
-  float: left;
-  margin-left: -40px;
-}
-.outer-wrapper ul input + label > span > svg > polygon {
-  opacity: 0;
-}
-.outer-wrapper ul input:checked + label > span > svg > polygon {
-  opacity: 1;
+  padding: 2px 0px;
 }
 .outer-wrapper ol {
   padding-left: 40px;
 }
 .outer-wrapper ol li {
   list-style-type: decimal;
+}
+.outer-wrapper input[type="radio"] {
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+  height: 20px;
+  margin-right: 15px;
+  position: relative;
+  width: 20px;
+  -webkit-appearance: none;
+}
+.outer-wrapper input[type="radio"]:after {
+  content: "\2713";
+  font-size: 1em;
+  display: inline-block;
+  left: 0.25em;
+  position: relative;
+  top: 0.1em;
+}
+.outer-wrapper li:nth-of-type(1) input[type="radio"] {
+  background-color: #3CBAC8;
+}
+.outer-wrapper li:nth-of-type(1) input[type="radio"]:after {
+  color: #3CBAC8;
+}
+.outer-wrapper li:nth-of-type(1) input[type="radio"]:checked:after {
+  color: white;
+}
+.outer-wrapper li:nth-of-type(2) input[type="radio"] {
+  background-color: #B9B2D8;
+}
+.outer-wrapper li:nth-of-type(2) input[type="radio"]:after {
+  color: #B9B2D8;
+}
+.outer-wrapper li:nth-of-type(2) input[type="radio"]:checked:after {
+  color: white;
+}
+.outer-wrapper li:nth-of-type(3) input[type="radio"] {
+  background-color: #F68628;
+}
+.outer-wrapper li:nth-of-type(3) input[type="radio"]:after {
+  color: #F68628;
+}
+.outer-wrapper li:nth-of-type(3) input[type="radio"]:checked:after {
+  color: white;
+}
+.outer-wrapper li:nth-of-type(4) input[type="radio"] {
+  background-color: #B9D98B;
+}
+.outer-wrapper li:nth-of-type(4) input[type="radio"]:after {
+  color: #B9D98B;
+}
+.outer-wrapper li:nth-of-type(4) input[type="radio"]:checked:after {
+  color: white;
+}
+.outer-wrapper li:nth-of-type(5) input[type="radio"] {
+  background-color: #F69890;
+}
+.outer-wrapper li:nth-of-type(5) input[type="radio"]:after {
+  color: #F69890;
+}
+.outer-wrapper li:nth-of-type(5) input[type="radio"]:checked:after {
+  color: white;
+}
+.outer-wrapper li:nth-of-type(6) input[type="radio"] {
+  background-color: #F2653F;
+}
+.outer-wrapper li:nth-of-type(6) input[type="radio"]:after {
+  color: #F2653F;
+}
+.outer-wrapper li:nth-of-type(6) input[type="radio"]:checked:after {
+  color: white;
 }
 .outer-wrapper svg text {
   font-size: 0.8em;
@@ -91,7 +144,8 @@
 
 	<div class="chart"></div>
 
-	<form class="choose-network"></form>
+	<form class="choose-network">
+	</form>
 	<div class="options"></div>
 
 	<h3 class="comment-head">Voices from the survey</h3>
@@ -117,8 +171,10 @@ function buildCheckboxes (allSites, colour, strokeColour) {
 		.append("li")
 		.html(function (d, i) {
 			var checked = (i === 0) ? 'checked':'';
+			var siteName = d.site;
+			var safeSiteName = siteName.toLowerCase().split('.').join("-");
 
-			var innerHTML = "<input type='radio' id='" + d.site + "' name='selectedSite' " + checked + "><label for='" + d.site + "'><span><svg height='20' width='20'><circle cx='10' cy='10' r='10' fill='" + colour[i] + "' class='dot" + i + "'></circle><polygon fill='#fff' points='8.163,11.837 6.062,9.737 3.963,11.837 6.062,13.938 8.163,16.037 16.037,8.162 13.938,6.062'/></polygon></svg></span> " + d.site + " (" + format(d.total )+ " regular visitors)</label>";
+			var innerHTML = "<input type='radio' id='" + safeSiteName + "' name='selectedSite' " + checked + "><label for='" + safeSiteName + "'>" + d.site + " (" + format(d.total )+ " regular visitors)</label>";
 
 			return innerHTML;
 		});
@@ -459,11 +515,11 @@ function updateComment (comment) {
 
 			/*	==================================================================================== */
 			/*	Load D3 */
-			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
-			// $.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			// $.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			$.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 
-				$.when($.ajax("data/table.html"), $.ajax("data/comments.html")).done(function (a1, a2) {
-				// $.when($.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701"), $.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18992")).done(function (a1, a2) {
+				// $.when($.ajax("data/table.html"), $.ajax("data/comments.html")).done(function (a1, a2) {
+				$.when($.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18701"), $.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15117/7.18992")).done(function (a1, a2) {
 
 					networkData = buildDataSet(a1[0]);
 					networkComments = buildComments(a2[0]);				
