@@ -43,4 +43,4 @@ var buildGraphic = function(dataSet, margin, width, height, radiusScale, colour,
 			return updateGraphic(x);
 		}
 	};
-};
+}
