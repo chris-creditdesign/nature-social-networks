@@ -49,11 +49,9 @@
 
 			/*	==================================================================================== */
 			/*	Load D3 */
-			// $.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
-			$.getScript("https://poly-admin1.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 
-				// $.when($.ajax("data/table.html"), $.ajax("data/comments.html")).done(function (a1, a2) {
-				$.when($.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15711/7.19050"), $.ajax("https://poly-admin1.nature.com/preview/www/2.788/1.15711/7.19051")).done(function (a1, a2) {
+				$.when($.ajax("http://www.nature.com/news/social-networks-7.19050"), $.ajax("http://www.nature.com/news/comments-7.19051")).done(function (a1, a2) {
 
 					networkData = buildDataSet(a1[0]);
 					networkComments = buildComments(a2[0]);				
